@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SwapScene : MonoBehaviour
 {
-    public void LoadScene(string nameOfScene){
-        SceneManager.LoadScene(nameOfScene);     
+    [SerializeField] public string nameOfScene;
+    void awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(nameOfScene);
     }
 }
