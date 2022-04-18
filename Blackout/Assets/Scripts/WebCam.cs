@@ -1,12 +1,12 @@
-using System.Collections;
+// using System.Collections;
 // using System.Collections.Generic;
 // using UnityEngine;
 
 // public class WebCam : MonoBehaviour
 // {
-//     // [SerializedField] RawImage display;a
-//     //                   WebCamTexture texture;
-//         IEnumerator Start()
+//     [SerializedField] RawImage display;a
+//                       WebCamTexture texture;
+//     IEnumerator Start()
 //     {
 //         findWebCams();
 
@@ -20,17 +20,17 @@ using System.Collections;
 //             Debug.Log("webcam not found");
 //         }
 
-//         findMicrophones();
+//         //findMicrophones();
 
-//         yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
-//         if (Application.HasUserAuthorization(UserAuthorization.Microphone))
-//         {
-//             Debug.Log("Microphone found");
-//         }
-//         else
-//         {
-//             Debug.Log("Microphone not found");
-//         }
+//         // yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
+//         // if (Application.HasUserAuthorization(UserAuthorization.Microphone))
+//         // {
+//         //     Debug.Log("Microphone found");
+//         // }
+//         // else
+//         // {
+//         //     Debug.Log("Microphone not found");
+//         // }
 //     }
 
 //     public void StartStopCam(){
