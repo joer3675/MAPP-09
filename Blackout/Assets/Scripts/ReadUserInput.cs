@@ -17,6 +17,7 @@ public class ReadUserInput : MonoBehaviour
 
         _userData.sex = dropDownSex.options[dropDownSex.value].text;
 
+        //Test comment
 
         if (hasInput())
         {
