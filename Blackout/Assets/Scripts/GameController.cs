@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    private SwapScene swapScene;
+    [SerializeField] private SwapScene swapScene;
 
     [SerializeField] private string loadSceneSaved;
     public Button[] sceneOneButtons;
@@ -28,9 +28,9 @@ public class GameController : MonoBehaviour
     // // }
 
 
-    // public void ButtonSavedPressed()
-    // {
-    //     swapScene.LoadScene(loadSceneSaved);
-    // }
+    public void ButtonSavedPressed()
+    {
+        swapScene.LoadScene();
+    }
 
 }

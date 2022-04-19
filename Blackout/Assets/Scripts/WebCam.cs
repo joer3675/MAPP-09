@@ -1,40 +1,53 @@
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using System.IO;
+using UnityEngine;
 
-// public class WebCam : MonoBehaviour
-// {
-//     [SerializedField] RawImage display;a
-//                       WebCamTexture texture;
-//     IEnumerator Start()
-//     {
-//         findWebCams();
+public class WebCam : MonoBehaviour
+{
 
-//         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
-//         if (Application.HasUserAuthorization(UserAuthorization.WebCam))
-//         {
-//             Debug.Log("webcam found");
-//         }
-//         else
-//         {
-//             Debug.Log("webcam not found");
-//         }
+    public RawImage rawimage;  //Image for rendering what the camera sees.
+    WebCamTexture webcamTexture = null;
 
-//         //findMicrophones();
+    void Start()
+    {
+        //Save get the camera devices, in case you have more than 1 camera.
+        WebCamDevice[] camDevices = WebCamTexture.devices;
 
-//         // yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
-//         // if (Application.HasUserAuthorization(UserAuthorization.Microphone))
-//         // {
-//         //     Debug.Log("Microphone found");
-//         // }
-//         // else
-//         // {
-//         //     Debug.Log("Microphone not found");
-//         // }
-//     }
+        //Get the used camera name for the WebCamTexture initialization.
+        string camName = camDevices[0].name;
+        webcamTexture = new WebCamTexture(camName);
 
-//     public void StartStopCam(){
+        //Render the image in the screen.
+        rawimage.texture = webcamTexture;
+        rawimage.material.mainTexture = webcamTexture;
+        webcamTexture.Play();
+    }
 
-//     }
+    void Update()
+    {
+        //This is to take the picture, save it and stop capturing the camera image.
+        if (Input.GetMouseButtonDown(0))
+        {
+            SaveImage();
+            webcamTexture.Stop();
+        }
+    }
 
-// }
+    void SaveImage()
+    {
+        //Create a Texture2D with the size of the rendered image on the screen.
+        Texture2D texture = new Texture2D(rawimage.texture.width, rawimage.texture.height, TextureFormat.ARGB32, false);
+
+        //Save the image to the Texture2D
+        texture.SetPixels(webcamTexture.GetPixels());
+        texture.Apply();
+
+        //Encode it as a PNG.
+        byte[] bytes = texture.EncodeToPNG();
+
+        //Save it in a file.
+        File.WriteAllBytes(Application.dataPath + "/images/testimg.png", bytes);
+    }
+}

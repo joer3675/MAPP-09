@@ -12,6 +12,8 @@ public class SwapScene : MonoBehaviour
     }
     public void LoadScene()
     {
+        
         SceneManager.LoadScene(nameOfScene);
+
     }
 }
