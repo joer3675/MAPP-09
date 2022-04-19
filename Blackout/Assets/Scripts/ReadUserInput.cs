@@ -10,6 +10,7 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private Dropdown dropDownSex;
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
 
+
     public void SaveToJson()
     {
         int.TryParse(inputFieldAge.text, out _userData.age);
@@ -24,6 +25,7 @@ public class ReadUserInput : MonoBehaviour
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
             swapScene.LoadScene();
         }
+        
     }
 
     public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 ? true : false; }
