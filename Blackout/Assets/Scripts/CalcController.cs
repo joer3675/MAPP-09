@@ -5,7 +5,7 @@ using UnityEngine;
 public class CalcController : MonoBehaviour
 {
     private string inputA;
-    private float inputAlchohol = 0;
+    private double inputAlchohol = 0;
     private double isWoman = 4.7;
     private double isMan = 3.75;
     private bool Woman = true;
@@ -22,8 +22,8 @@ public class CalcController : MonoBehaviour
     public void GetBACLevelMan()
     {
 
-        a = ouncesOfAlchohol * 3.75;
-        double BACMan = a / inputA;
+        a = inputAlchohol * 3.75;
+        double BACMan = a / weight;
         Debug.Log(BACMan);
 
     }
@@ -31,8 +31,8 @@ public class CalcController : MonoBehaviour
     public void GetBACLevelWoman()
     {
 
-        b = ouncesOfAlchohol * 4.7;
-        double BACWoman = b / inputA;
+        b = inputAlchohol * 4.7;
+        double BACWoman = b / weight;
         Debug.Log(BACWoman);
 
     }
