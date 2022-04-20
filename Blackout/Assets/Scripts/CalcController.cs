@@ -19,6 +19,12 @@ public class CalcController : MonoBehaviour
         Debug.Log(inputA);
     }
 
+    public void GetInputAlchohol(double alchohol)
+    {
+        inputAlchohol = alchohol;
+        Debug.Log(inputAlchohol);
+    }
+
     public void GetBACLevelMan()
     {
 
