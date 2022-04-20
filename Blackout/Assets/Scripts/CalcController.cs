@@ -41,12 +41,12 @@ public class CalcController : MonoBehaviour
     {
         if (Woman == true)
         {
-            GetBACLevelWoman;
+            GetBACLevelWoman();
         }
 
         else
         {
-            GetBACLevelMan;
+            GetBACLevelMan();
         }
     }
 
