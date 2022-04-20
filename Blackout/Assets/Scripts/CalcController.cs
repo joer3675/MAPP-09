@@ -7,10 +7,10 @@ public class CalcController : MonoBehaviour
 {
     private int int_weight;
     private float alcoholResult;
-    private float wine = 12.8f; //12,5cl, 13%
-    private float beer = 15.0f; //33cl, 5,2%
-    private float shot = 12.6f; //4cl
-    
+    private double wine = 12.8f; //12,5cl, 13%
+    private double beer = 15.0f; //33cl, 5,2%
+    private double shot = 12.6f; //4cl
+    private double currentPromillehalt;
 
 
     [SerializeField] private Text result;
@@ -30,14 +30,30 @@ public class CalcController : MonoBehaviour
 
     public void CalculatePromille()
     {
+        
+        int currentWeight = GetInputWeight();
+        Debug.Log(currentWeight);
 
-        int CurrentWeight = GetInputWeight();
-        Debug.Log(CurrentWeight);
-
-        result.text = "" + CurrentWeight;
+        result.text = "" + currentWeight;
         result.gameObject.SetActive(true);
 
+        if (dropDownSex.options[dropDownSex.value].text == "Kvinna")
+        {
+            currentPromillehalt = beer / (currentWeight * 0.6);
+        }
+        else
+        {
+            currentPromillehalt = beer / (currentWeight * 0.7);
+        }
+        result.text = "" + currentPromillehalt;
+
+
     }
+
+    //private double GetDrink()
+    //{
+        
+    //}
 
     //anv?nd CurrentWeight f?r utr?kning
     //en funktion som heter printResult med result.text = "" + CurrentWeight;
