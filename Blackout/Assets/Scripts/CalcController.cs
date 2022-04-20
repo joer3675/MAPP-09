@@ -10,8 +10,8 @@ public class CalcController : MonoBehaviour
     private double isMan = 3.75;
     private bool Woman = true;
     private double ouncesOfAlchohol;
-    private string a;
-    private string b;
+    private double a;
+    private double b;
 
     public void GetInputWeight(string weight)
     {
