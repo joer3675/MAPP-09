@@ -6,11 +6,20 @@ using UnityEngine.UI;
 public class CalcController : MonoBehaviour
 {
     private int int_weight;
-    private float alcoholResult;
+    private int int_beer;
+    private int int_wine;
+    private int int_shot;
+    
     private double wine = 12.8f; //12,5cl, 13%
     private double beer = 15.0f; //33cl, 5,2%
     private double shot = 12.6f; //4cl
     private double currentPromillehalt;
+
+    private double beerGram;
+    private double wineGram;
+    private double shotGram;
+    
+
 
 
     [SerializeField] private Text result;
@@ -19,45 +28,64 @@ public class CalcController : MonoBehaviour
     [SerializeField] private Dropdown dropDownSex;
 
     [SerializeField] private InputField inputFieldWeight;
+    [SerializeField] private InputField inputFieldBeer;
+    [SerializeField] private InputField inputFieldWine;
+    [SerializeField] private InputField inputFieldShot;
 
-    
-
-    private int GetInputWeight()
+    private void InputParseToInt()
     {
         int.TryParse(inputFieldWeight.text, out int_weight);
-        return int_weight;
+        int.TryParse(inputFieldBeer.text, out int_beer);
+        int.TryParse(inputFieldWine.text, out int_wine);
+        int.TryParse(inputFieldShot.text, out int_shot);
+        Debug.Log(inputFieldWeight.text + " text" + int_weight + " weight");
+       
+
     }
+
+    private double TotalSumOfGram()
+    {
+        beerGram = (int_beer * beer);
+
+        Debug.Log(int_weight + "weight");
+
+
+        wineGram = (int_wine * wine);
+
+        Debug.Log(int_shot + " int_shot " + shot + " shotGram"); 
+
+        shotGram = (int_shot * shot);
+
+        Debug.Log(shotGram);
+
+         return (beerGram + wineGram + shotGram);
+
+    }
+   
 
     public void CalculatePromille()
     {
-        
-        int currentWeight = GetInputWeight();
-        Debug.Log(currentWeight);
 
-        result.text = "" + currentWeight;
+        //int currentWeight = GetInputWeight();
+        //Debug.Log(currentWeight);
+        InputParseToInt();
+        result.text = "" + int_weight;
         result.gameObject.SetActive(true);
 
         if (dropDownSex.options[dropDownSex.value].text == "Kvinna")
         {
-            currentPromillehalt = beer / (currentWeight * 0.6);
+            currentPromillehalt = TotalSumOfGram() / (int_weight * 0.6);
         }
         else
         {
-            currentPromillehalt = beer / (currentWeight * 0.7);
+            currentPromillehalt = TotalSumOfGram() / (int_weight * 0.7);
         }
-        result.text = "" + currentPromillehalt;
+        result.text = "Din promille halt = " + System.Math.Round(currentPromillehalt, 2);
 
 
     }
 
-    //private double GetDrink()
-    //{
-        
-    //}
-
-    //anv?nd CurrentWeight f?r utr?kning
-    //en funktion som heter printResult med result.text = "" + CurrentWeight;
-
+    
     //hur m?nga cl och hur mycket % 
 
 
@@ -65,61 +93,5 @@ public class CalcController : MonoBehaviour
     //ett glas vin ?r 12,5 cl, 13%, 13g
     //Shot/snaps ?r 4cl, 40%, 13g
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //private double inputAlchohol = 0;
-    //private double isWoman = 4.7;
-    //private double isMan = 3.75;
-    //private bool Woman = true;
-    //private double ouncesOfAlchohol;
-    //private double a;
-    //private double b;
-
-    //public void GetInputAlchohol(double alchohol)
-    //{
-    //    inputAlchohol = alchohol;
-    //    Debug.Log(inputAlchohol);
-    //}
-
-    //public void GetBACLevelMan()
-    //{
-
-    //    a = inputAlchohol * 3.75;
-    //    double BACMan = a / weight;
-    //    Debug.Log(BACMan);
-
-    //}
-
-    //public void GetBACLevelWoman()
-    //{
-
-    //    b = inputAlchohol * 4.7;
-    //    double BACWoman = b / weight;
-    //    Debug.Log(BACWoman);
-
-    //}
-
-    //public void GetBACLevel()
-    //{
-    //    if (Woman == true)
-    //    {
-    //        GetBACLevelWoman();
-    //    }
-
-    //    else
-    //    {
-    //        GetBACLevelMan();
-    //    }
-    //}
 
 }
