@@ -5,27 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class SwapScene : MonoBehaviour
 {
-    //[SerializeField] public string nameOfScene;
-    
-    // public GameObject gameObject;
 
+    private static SwapScene swapScene;
    
-    // void Awake()
-    // {
-    //     //ReadUserInput readUserInput = gameObject.GetCompontent<ReadUserInput>;
-    //     //DontDestroyOnLoad(this.gameObject);
-    // }
+    void Awake()
+    {
+ 
+        DontDestroyOnLoad(this.gameObject);
+        if(swapScene == null){
+            swapScene = this;
+        }else{
+            DestroyObject(gameObject);
+        }
+    }
 
-
-    // void Start(){
-    //     ReadUserInput readUserInput = gameObject.GetCompontent<ReadUserInput>;
-    //     Debug.Log("Here");
-    //     if(readUserInput.hasInput()){
-    //         LoadScene("Menu");
-    //     }
-    //     Debug.Log(readJsonData.hasInput());
-
-    // }
 
 
     public void LoadScene(string nameOfScene )

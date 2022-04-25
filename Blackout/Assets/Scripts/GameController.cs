@@ -8,28 +8,29 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private SwapScene swapScene;
-
-
-    [SerializeField] private string loadSceneSaved;
     public Button[] sceneOneButtons;
-    //private string s;
 
-    private Button btnPressed;
+    void Awake(){
+
+        swapScene = GameObject.FindObjectOfType<SwapScene>();
+    }
 
     void Start()
     {
         foreach (Button btn in sceneOneButtons)
         {
-            btn.onClick.AddListener( () => LoadScene(getScene(btn.name)) );
+            btn.onClick.AddListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
+            //btn.onClick.RemoveListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
+            //btn.onClick.AddListener( LoadScene(getSceneName(btn.name)));
         }
-
-    }
-    public void LoadScene(string sceneName){
-        if(sceneName!= null)
-        swapScene.LoadScene(sceneName);
     }
 
-    public string getScene(string buttonName){
+
+    private void LoadScene(string sceneName){
+        if(sceneName!= null) swapScene.LoadScene(sceneName);
+    }
+
+    private string getSceneName(string buttonName){
         switch(buttonName)
         {
             case "Button_Scene_StartGame":
@@ -39,6 +40,8 @@ public class GameController : MonoBehaviour
             case "Button_Scene_PromilleCalc":
                 return "PromilleCalc";
             case "Button_Save":
+                return "Menu";
+            case "Button_Back":
                 return "Menu";
             default:
                 return null;

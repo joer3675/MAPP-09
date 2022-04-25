@@ -205,19 +205,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 50684289}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2000068279}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: ScenePromilleCalc
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SceneActive
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &50684289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,19 +349,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 213243894}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2000068279}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: SceneStartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &213243894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,19 +752,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1257015452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2000068279}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: SceneTimeline
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SceneActive
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1257015452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapScene: {fileID: 160109684}
-  loadSceneSaved: StartGame
   sceneOneButtons:
   - {fileID: 213243893}
   - {fileID: 1257015451}
