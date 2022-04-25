@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 181476506}
   - component: {fileID: 181476505}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Button_Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,8 +509,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622674780}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 278.72986, y: 441.06894, z: -411.9299}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 278.72986, y: 441.06897, z: -411.92993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 626762095}
   - component: {fileID: 626762094}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_Beer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 1147666214}
   - component: {fileID: 1147666213}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button_Wine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

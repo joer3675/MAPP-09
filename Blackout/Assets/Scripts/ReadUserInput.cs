@@ -22,9 +22,10 @@ public class ReadUserInput : MonoBehaviour
 
         if (hasInput())
         {
+            //hasNewInput = true;
             string dataUser = JsonUtility.ToJson(_userData);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
-            swapScene.LoadScene();
+            swapScene.LoadScene("Menu");
         }
         
     }
@@ -38,5 +39,6 @@ public class UserData
 {
     public string sex;
     public int age, weight;
+    //public boolean hasNewInput = false;
 
 }
