@@ -29,18 +29,12 @@ public class Location
 
 
 
-
 public class SaveData : MonoBehaviour
 {
     [SerializeField] private Text textPromille;
     private int weight;
     private string sex;
-    private UserData jsonData;
-
-    void start()
-    {
-
-    }
+    //private UserData jsonData;
 
 
 
@@ -48,29 +42,30 @@ public class SaveData : MonoBehaviour
     {
         UserDataJson ud = readJsonData();
         //string userInformation = readJsonData();
-        Debug.Log(ud.age + " age");
-        Debug.Log(ud.sex + " sex");
-        Debug.Log(ud.weight + " weight");
-        
-
-        //Hämta location
+        Debug.Log(ud.age + " : age");
+        Debug.Log(ud.sex + " : sex");
+        Debug.Log(ud.weight + " : weight");       
+    
+        string dataUser = JsonUtility.ToJson(this);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
+        //Hï¿½mta location
         // ta en bild?
         // kanpp 1,2,3 ?
 
-        // if öl { gör beräkning}
+        // if ï¿½l { gï¿½r berï¿½kning}
     }
 
 
     void showPromilleOnSceen()
     {
-        // visa promille på skärm med max 2 decimaler
+        // visa promille pï¿½ skï¿½rm med max 2 decimaler
         // 
     }
 
 
     void calcPromille()
     {
-        // räkna ut promille
+        // rï¿½kna ut promille
     }
 
     private UserDataJson readJsonData()
