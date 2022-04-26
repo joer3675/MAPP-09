@@ -14,24 +14,27 @@ public class HistoryHandler : MonoBehaviour
         dropdown.options.Clear();
 
         List<string> items = new List<string>();
-        items.Add("Item 1");
-        items.Add("Item 2");
+        items.Add("2022-04-22");
+        items.Add("2022-04-15");
 
-        foreach (var item in items) ;
+        foreach (var item in items)
         {
             dropdown.options.Add(new Dropdown.OptionData() { text = item });
         }
 
         DropdownItemSelected(dropdown);
 
-        dropdown.onValueChanged.AddListener(delegate {DropdownItemSelected(dropdown);
 
-        }
+        dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
+
+    }   
+
+
         void DropdownItemSelected(Dropdown dropdown)
         {
             int index = dropdown.value;
             TextBox.text = dropdown.options[index].text;
         }
+    
 
-    }
 }
