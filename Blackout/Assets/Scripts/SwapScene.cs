@@ -15,10 +15,10 @@ public class SwapScene : MonoBehaviour
         if(swapScene == null){
             swapScene = this;
         }else{
-            DestroyObject(gameObject);
+            Destroy(gameObject);
         }
     }
-
+    //
 
 
     public void LoadScene(string nameOfScene )

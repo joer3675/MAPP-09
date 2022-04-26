@@ -7,18 +7,20 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private SwapScene swapScene;
+    private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
     void Awake(){
 
         swapScene = GameObject.FindObjectOfType<SwapScene>();
+  
     }
 
     void Start()
     {
         foreach (Button btn in sceneOneButtons)
         {
+            
             btn.onClick.AddListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
             //btn.onClick.RemoveListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
             //btn.onClick.AddListener( LoadScene(getSceneName(btn.name)));
@@ -27,6 +29,7 @@ public class GameController : MonoBehaviour
 
 
     private void LoadScene(string sceneName){
+
         if(sceneName!= null) swapScene.LoadScene(sceneName);
     }
 

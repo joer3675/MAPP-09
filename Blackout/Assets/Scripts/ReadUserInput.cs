@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+
+
+[System.Serializable]
+public class UserData
+{
+    public string sex;
+    public int age, weight;
+}
+
 
 public class ReadUserInput : MonoBehaviour
 {
-    [SerializeField] private UserData _userData = new UserData();
+    private UserData _userData = new UserData();
     [SerializeField] private SwapScene swapScene;
     [SerializeField] private Dropdown dropDownSex;
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
@@ -15,10 +25,7 @@ public class ReadUserInput : MonoBehaviour
     {
         int.TryParse(inputFieldAge.text, out _userData.age);
         int.TryParse(inputFieldWeight.text, out _userData.weight);
-
         _userData.sex = dropDownSex.options[dropDownSex.value].text;
-
-        //Test comment
 
         if (hasInput())
         {
@@ -27,18 +34,32 @@ public class ReadUserInput : MonoBehaviour
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
             swapScene.LoadScene("Menu");
         }
-        
+    }
+
+    public void ReadFromJson()
+    {
+        // StreamReader reader = new StreamReader(Application.persistentDataPath + "UserData.json");
+        // string json = reader.ReadToEnd();     
+        // UserData data = JsonUtility.FromJson<UserData>(json);
+
+        // string saveString = System.IO.File.ReadAllText(Application.persistentDataPath + "UserData.json");
+        // string[] content = saveString.Split(new [] {})
+        // Debug.Log(saveString);
+
+        string dataString = System.IO.File.ReadAllText(Application.persistentDataPath + "UserData.json");
+        UserData loadedData = JsonUtility.FromJson<UserData>(dataString);
+        Debug.Log(loadedData.age + " This is age");
     }
 
     public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 ? true : false; }
-}
-
-
-[System.Serializable]
-public class UserData
-{
-    public string sex;
-    public int age, weight;
-    //public boolean hasNewInput = false;
 
 }
+
+
+
+
+
+
+
+
+

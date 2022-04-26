@@ -5,32 +5,35 @@ using UnityEngine.UI;
 
 public class CalcController : MonoBehaviour
 {
-    private int int_weight;
-    private int int_beer;
-    private int int_wine;
-    private int int_shot;
-    
-    private double wine = 12.8f; //12,5cl, 13%
-    private double beer = 15.0f; //33cl, 5,2%
-    private double shot = 12.6f; //4cl
-    private double currentPromillehalt;
-
-    private double beerGram;
-    private double wineGram;
-    private double shotGram;
-    
-
-
-
     [SerializeField] private Text result;
-
-
     [SerializeField] private Dropdown dropDownSex;
-
     [SerializeField] private InputField inputFieldWeight;
     [SerializeField] private InputField inputFieldBeer;
     [SerializeField] private InputField inputFieldWine;
     [SerializeField] private InputField inputFieldShot;
+
+    private int int_weight;
+    private int int_beer;
+    private int int_wine;
+    private int int_shot;
+
+    private double beer = 13.2; //33cl, 5%  https://alkompassen.se/promilleraknare
+    private double wine = 16.2; //15cl, 13.5% https://alkompassen.se/promilleraknare
+    private double shot = 12.8; //4cl https://alkompassen.se/promilleraknare
+
+    // private double currentPromillehalt;
+    // private double beerGram;
+    // private double wineGram;
+    // private double shotGram;
+
+    public void ManualPromilleCalc()
+    {
+        string dropDown = dropDownSex.options[dropDownSex.value].text;
+        InputParseToInt();
+        double gram = TotalSumOfGram(int_beer, int_wine, int_shot);
+        double promille = CalculatePromille(dropDown, int_weight, gram);
+        displayPromille(promille);
+    }
 
     private void InputParseToInt()
     {
@@ -38,54 +41,61 @@ public class CalcController : MonoBehaviour
         int.TryParse(inputFieldBeer.text, out int_beer);
         int.TryParse(inputFieldWine.text, out int_wine);
         int.TryParse(inputFieldShot.text, out int_shot);
-        Debug.Log(inputFieldWeight.text + " text" + int_weight + " weight");
-       
 
     }
 
-    private double TotalSumOfGram()
+    public double TotalSumOfGram(int b, int w, int s)
     {
-        beerGram = (int_beer * beer);
+        // double beerGram = (int_beer * beer);
+        // double wineGram = (int_wine * wine);
+        // double shotGram = (int_shot * shot);
 
-        Debug.Log(int_weight + "weight");
+        double beerGram = (b * beer);
+        double wineGram = (w * wine);
+        double shotGram = (s * shot);
 
-
-        wineGram = (int_wine * wine);
-
-        Debug.Log(int_shot + " int_shot " + shot + " shotGram"); 
-
-        shotGram = (int_shot * shot);
-
-        Debug.Log(shotGram);
-
-         return (beerGram + wineGram + shotGram);
+        return (beerGram + wineGram + shotGram);
 
     }
-   
 
-    public void CalculatePromille()
+    /*    För kvinnor:
+        Alkohol i g/(kroppsvikten i kg x 60 %) - (0,15 x timmar från intagets början) = promille
+        För män:
+        Alkohol i g/(kroppsvikten i kg x 70 %) - (0,15 x timmar från intagets början) = promille
+    */
+    public double CalculatePromille(string _sex, int weight, double gram)
     {
+        double currentPromillehalt = 0;
 
-        //int currentWeight = GetInputWeight();
-        //Debug.Log(currentWeight);
-        InputParseToInt();
-        result.text = "" + int_weight;
-        result.gameObject.SetActive(true);
-
-        if (dropDownSex.options[dropDownSex.value].text == "Kvinna")
+        if (_sex == "Kvinna")
         {
-            currentPromillehalt = TotalSumOfGram() / (int_weight * 0.6);
+            currentPromillehalt = gram / (weight * 0.62); //alkoholförbränning.se vart 0.62 och 0.71 kommer från
         }
         else
         {
-            currentPromillehalt = TotalSumOfGram() / (int_weight * 0.7);
+            currentPromillehalt = gram / (weight * 0.71);
         }
-        result.text = "Din promille halt = " + System.Math.Round(currentPromillehalt, 2);
+
+        /* En cirka ekvation för att beräkna x h till 0 promille i blodet */
+
+        // double tillNykter = System.Math.Ceiling(currentPromillehalt / 0.15);
+        // Debug.Log(currentPromillehalt);
+        // Debug.Log(tillNykter + " h till nykter");
+
+        return currentPromillehalt;
+
 
 
     }
 
-    
+    private void displayPromille(double promille)
+    {
+        result.text = "" + int_weight;
+        result.gameObject.SetActive(true);
+        result.text = "Din promille halt = " + System.Math.Round(promille, 2);
+    }
+
+
     //hur m?nga cl och hur mycket % 
 
 
