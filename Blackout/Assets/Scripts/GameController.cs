@@ -10,35 +10,33 @@ public class GameController : MonoBehaviour
     private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
-    void Awake(){
-
+    void Awake()
+    {
         swapScene = GameObject.FindObjectOfType<SwapScene>();
-  
     }
 
     void Start()
     {
         foreach (Button btn in sceneOneButtons)
         {
-            
-            btn.onClick.AddListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
-            //btn.onClick.RemoveListener( () => {LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
-            //btn.onClick.AddListener( LoadScene(getSceneName(btn.name)));
+            btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
         }
     }
 
 
-    private void LoadScene(string sceneName){
+    private void LoadScene(string sceneName)
+    {
 
-        if(sceneName!= null) swapScene.LoadScene(sceneName);
+        if (sceneName != null) swapScene.LoadScene(sceneName);
     }
 
-    private string getSceneName(string buttonName){
-        switch(buttonName)
+    private string getSceneName(string buttonName)
+    {
+        switch (buttonName)
         {
             case "Button_Scene_StartGame":
                 return "StartGame";
-            case "Button_Scene_Timeline": 
+            case "Button_Scene_Timeline":
                 return "Timeline";
             case "Button_Scene_PromilleCalc":
                 return "PromilleCalc";
@@ -49,24 +47,5 @@ public class GameController : MonoBehaviour
             default:
                 return null;
         }
-
     }
-
-    // public void SceneStartGame(){
-    //     swapScene.LoadScene("StartGame");
-    // }
-    // public void SceneTimeline(){
-    //     swapScene.LoadScene("Timeline");
-    // }
-    // public void ScenePromilleCalc(){
-    //     swapScene.LoadScene("PromilleCalc");
-    // }
-    // public void SceneOption(){
-    //     swapScene.LoadScene("StartMenu");
-    // }
-    // public void ButtonSavedPressed()
-    // {
-    //     swapScene.LoadScene("Menu");
-    // }
-
 }

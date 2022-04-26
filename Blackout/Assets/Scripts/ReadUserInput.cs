@@ -30,7 +30,7 @@ public class ReadUserInput : MonoBehaviour
         if (hasInput())
         {
             //hasNewInput = true;
-            string dataUser = JsonUtility.ToJson(_userData);
+            string dataUser = JsonUtility.ToJson(_userData, true);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
             swapScene.LoadScene("Menu");
         }
