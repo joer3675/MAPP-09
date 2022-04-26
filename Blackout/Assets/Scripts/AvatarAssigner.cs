@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AvatarAssigner : MonoBehaviour
 {
     // lite osäker kring hur man ska hämta informationen från det andra scriptet,
-    // har nu bara följt en tutorial på yt så vet ej om detta funkar att använda i detta läge...
+    // har nu bara följt en tutorial på yt så vet ej om detta funkar att använda haha...
 
     ReadUserInput readUserInput;
     UserData userData;
@@ -25,7 +25,6 @@ public class AvatarAssigner : MonoBehaviour
 
     void Start()
     {
-        
         {
             
         }
