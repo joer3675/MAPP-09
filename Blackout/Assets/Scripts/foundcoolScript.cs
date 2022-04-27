@@ -1,53 +1,53 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine.UI;
-//using System.IO;
-//using UnityEngine;
+//using system.collections;
+//using system.collections.generic;
+//using unityengine.ui;
+//using system.io;
+//using unityengine;
 
-//public class CameraTest : MonoBehaviour
+//public class cameratest : monobehaviour
 //{
 
-//    public RawImage rawimage;  //Image for rendering what the camera sees.
-//    WebCamTexture webcamTexture = null;
+//    public rawimage rawimage;  //image for rendering what the camera sees.
+//    webcamtexture webcamtexture = null;
 
-//    void Start()
+//    void start()
 //    {
-//        //Save get the camera devices, in case you have more than 1 camera.
-//        WebCamDevice[] camDevices = WebCamTexture.devices;
+//        //save get the camera devices, in case you have more than 1 camera.
+//        webcamdevice[] camdevices = webcamtexture.devices;
 
-//        //Get the used camera name for the WebCamTexture initialization.
-//        string camName = camDevices[0].name;
-//        webcamTexture = new WebCamTexture(camName);
+//        //get the used camera name for the webcamtexture initialization.
+//        string camname = camdevices[0].name;
+//        webcamtexture = new webcamtexture(camname);
 
-//        //Render the image in the screen.
-//        rawimage.texture = webcamTexture;
-//        rawimage.material.mainTexture = webcamTexture;
-//        webcamTexture.Play();
+//        //render the image in the screen.
+//        rawimage.texture = webcamtexture;
+//        rawimage.material.maintexture = webcamtexture;
+//        webcamtexture.play();
 //    }
 
-//    void Update()
+//    void update()
 //    {
-//        //This is to take the picture, save it and stop capturing the camera image.
-//        if (Input.GetMouseButtonDown(0))
+//        //this is to take the picture, save it and stop capturing the camera image.
+//        if (input.getmousebuttondown(0))
 //        {
-//            SaveImage();
-//            webcamTexture.Stop();
+//            saveimage();
+//            webcamtexture.stop();
 //        }
 //    }
 
-//    void SaveImage()
+//    void saveimage()
 //    {
-//        //Create a Texture2D with the size of the rendered image on the screen.
-//        Texture2D texture = new Texture2D(rawimage.texture.width, rawimage.texture.height, TextureFormat.ARGB32, false);
+//        //create a texture2d with the size of the rendered image on the screen.
+//        texture2d texture = new texture2d(rawimage.texture.width, rawimage.texture.height, textureformat.argb32, false);
 
-//        //Save the image to the Texture2D
-//        texture.SetPixels(webcamTexture.GetPixels());
-//        texture.Apply();
+//        //save the image to the texture2d
+//        texture.setpixels(webcamtexture.getpixels());
+//        texture.apply();
 
-//        //Encode it as a PNG.
-//        byte[] bytes = texture.EncodeToPNG();
+//        //encode it as a png.
+//        byte[] bytes = texture.encodetopng();
 
-//        //Save it in a file.
-//        File.WriteAllBytes(Application.dataPath + "/images/testimg.png", bytes);
+//        //save it in a file.
+//        file.writeallbytes(application.datapath + "/images/testimg.png", bytes);
 //    }
 //}

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour
 {
     private bool camAvailable;
-    private WebCamTexture backCam;
+    private WebCamTexture backCam = null;
     private Texture defaultBackground;
 
     public RawImage background;
@@ -59,5 +60,27 @@ public class PhoneCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-}
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SaveImage();
+            backCam.Stop();
+        }
+    }
+
+    public void SaveImage()
+    {
+        //Create a Texture2D with the size of the rendered image on the screen.
+        Texture2D texture = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
+
+        //Save the image to the Texture2D
+        texture.SetPixels(backCam.GetPixels());
+        texture.Apply();
+
+        //Encode it as a PNG.
+        byte[] bytes = texture.EncodeToPNG();
+
+        //Save it in a file.
+        File.WriteAllBytes(Application.dataPath + "/images/testimg.png", bytes);
+    }
 }
