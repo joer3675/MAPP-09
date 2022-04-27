@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class UserInfo
@@ -40,12 +41,13 @@ public class History
 [System.Serializable]
 public class Drinks
 {
-    // public Dictionary<string, int> beer = new Dictionary<string, int>();
-    // public Dictionary<string, int> wine = new Dictionary<string, int>();
-    // public Dictionary<string, int> shot = new Dictionary<string, int>();
-    public int beer = 0;
-    public int wine = 0;
-    public int shot = 0;
+    public int numberOfDrinks = 0;
+    public Dictionary<int, string> beer = new Dictionary<int, string>();
+    public Dictionary<int, string> wine = new Dictionary<int, string>();
+    public Dictionary<int, string> shot = new Dictionary<int, string>();
+    // public int beer = 0;
+    // public int wine = 0;
+    // public int shot = 0;
 
 }
 [System.Serializable]
@@ -84,8 +86,15 @@ public class SaveData : MonoBehaviour
     {
         startTime = System.DateTime.Now;
         ui = LoadUserInfo();
-        gameData = LoadUserData();
 
+        if (!File.Exists(Application.persistentDataPath + "GameData.json"))
+        {
+            Debug.Log("file does not exsit");
+        }
+        else
+        {
+            gameData = LoadUserData();
+        }
         if (gameData == null) { gameData = new GameData(); }
 
         if (_history == null && gameData.currentIndex == gameData.History.Count)
@@ -193,21 +202,23 @@ result.text = "Din promille halt = " + System.Math.Round(promille, 2);
 
     private void AddDrinks(string name)
     {
+        _drinks.numberOfDrinks++;
         if (name == "Button_Beer")
         {
-            //_drinks.beer.Add(timeCreated + index, 1);
-            _drinks.beer++;
+            _drinks.beer.Add(_drinks.numberOfDrinks, timeCreated);
+            //_drinks.beer++;
         }
         else if (name == "Button_Wine")
         {
-            //_drinks.wine.Add(timeCreated + index, 1);
-            _drinks.wine++;
+            _drinks.wine.Add(_drinks.numberOfDrinks, timeCreated);
+            //_drinks.wine++;
         }
         else if (name == "Button_Shot")
         {
-            //_drinks.shot.Add(timeCreated + index, 1);
-            _drinks.shot++;
+            _drinks.shot.Add(_drinks.numberOfDrinks, timeCreated);
+            //_drinks.shot++;
         }
+
         //index++;
 
 
@@ -238,10 +249,10 @@ result.text = "Din promille halt = " + System.Math.Round(promille, 2);
 
     private void SaveDataToFile(GameData gameData)
     {
-        string dataUser = JsonUtility.ToJson(gameData, true);
+        // string dataUser = JsonUtility.ToJson(gameData, true);
         try
         {
-
+            var dataUser = JsonConvert.SerializeObject(gameData, Formatting.Indented);
             System.IO.File.WriteAllText(Application.persistentDataPath + "GameData.json", dataUser);
             //Debug.Log("Data Saved");
         }
@@ -257,7 +268,10 @@ result.text = "Din promille halt = " + System.Math.Round(promille, 2);
         try
         {
             //Debug.Log("Data Loaded");
-            return JsonUtility.FromJson<UserInfo>(File.ReadAllText(Application.persistentDataPath + "UserData.json"));
+            var jsonObject = (File.ReadAllText(Application.persistentDataPath + "UserData.json"));
+            var newGameData = JsonConvert.DeserializeObject<UserInfo>(jsonObject);
+            return newGameData;
+            //return JsonUtility.FromJson<UserInfo>(File.ReadAllText(Application.persistentDataPath + "UserData.json"));
         }
         catch (Exception e)
         {
@@ -270,7 +284,11 @@ result.text = "Din promille halt = " + System.Math.Round(promille, 2);
         //Debug.Log("Data Loaded");
         try
         {
-            return JsonUtility.FromJson<GameData>(File.ReadAllText(Application.persistentDataPath + "GameData.json"));
+            //var newPerson = JsonConvert.DeserializeObject<Person>(serializedPerson);
+            var jsonObject = (File.ReadAllText(Application.persistentDataPath + "GameData.json"));
+            var newGameData = JsonConvert.DeserializeObject<GameData>(jsonObject);
+            return newGameData;
+            //return JsonUtility.FromJson<GameData>(File.ReadAllText(Application.persistentDataPath + "GameData.json"));
         }
         catch (Exception e)
         {
