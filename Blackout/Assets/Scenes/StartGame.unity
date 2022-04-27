@@ -329,7 +329,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 622674783}
         m_TargetAssemblyTypeName: SaveData, Assembly-CSharp
-        m_MethodName: gameOver
+        m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

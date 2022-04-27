@@ -29,7 +29,6 @@ public class ReadUserInput : MonoBehaviour
 
         if (hasInput())
         {
-            //hasNewInput = true;
             string dataUser = JsonUtility.ToJson(_userData, true);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
             swapScene.LoadScene("Menu");
@@ -38,14 +37,6 @@ public class ReadUserInput : MonoBehaviour
 
     public void ReadFromJson()
     {
-        // StreamReader reader = new StreamReader(Application.persistentDataPath + "UserData.json");
-        // string json = reader.ReadToEnd();     
-        // UserData data = JsonUtility.FromJson<UserData>(json);
-
-        // string saveString = System.IO.File.ReadAllText(Application.persistentDataPath + "UserData.json");
-        // string[] content = saveString.Split(new [] {})
-        // Debug.Log(saveString);
-
         string dataString = System.IO.File.ReadAllText(Application.persistentDataPath + "UserData.json");
         UserData loadedData = JsonUtility.FromJson<UserData>(dataString);
         Debug.Log(loadedData.age + " This is age");

@@ -11,7 +11,6 @@ public class UserInfo
 {
     public string sex;
     public int age, weight;
-
 }
 
 
@@ -20,6 +19,7 @@ public class GameData
 {
     public string sex;
     public int age, weight;
+    public int currentIndex = 0;
     public List<History> History = new List<History>();
 
 }
@@ -29,12 +29,25 @@ public class History
 {
     public string dateCreated;
     public int GameTime;
+    public List<Drinks> _Drinks = new List<Drinks>();
+    // public int beer = 0;
+    // public int wine = 0;
+    // public int shot = 0;
+    public double MaxPromille = 0;
+    public double promille = 0;
+}
+
+[System.Serializable]
+public class Drinks
+{
+    // public Dictionary<string, int> beer = new Dictionary<string, int>();
+    // public Dictionary<string, int> wine = new Dictionary<string, int>();
+    // public Dictionary<string, int> shot = new Dictionary<string, int>();
     public int beer = 0;
     public int wine = 0;
     public int shot = 0;
-    public double MaxPromille = 0;
-}
 
+}
 [System.Serializable]
 public class Location
 {
@@ -45,18 +58,19 @@ public class Location
 
 public class SaveData : MonoBehaviour
 {
-    [SerializeField] private Text textPromille;
-
+    [SerializeField] private Text _textPromille;
     private UserInfo ui;
     private GameData gameData;
-    //private GameData gameData = new GameData();
-    private History drinkData = new History();
-    public Button[] sceneButtons;
+    private History _history;
+    private Drinks _drinks;
     private CalcController calc;
-    private double promille;
-    private double currentPromille;
-    private DateTime startTime;
-    private DateTime currentTime;
+    private double promille, currentPromille;
+    private DateTime startTime, currentTime;
+    //private int index = 0;
+    //private DateTime currentTime;
+    private string timeCreated;
+    public Button[] sceneButtons;
+
 
     void Awake()
     {
@@ -64,13 +78,28 @@ public class SaveData : MonoBehaviour
 
     }
 
+    /*Start() laddar in tidigare data från två JSON filer. Skulle det vara så att programmet stängts av utan att kalla på gameOver() så kan användaren fortfarande forstätta spela på sitt
+        tidigare spel. Däremot om användaren väljer att avluta sin session, kommer List<DrinkData> History att ökas med ett nytt objekt*/
     void Start()
     {
         startTime = System.DateTime.Now;
-        drinkData.dateCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
         ui = LoadUserInfo();
         gameData = LoadUserData();
-        //gameData.
+
+        if (gameData == null) { gameData = new GameData(); }
+
+        if (_history == null && gameData.currentIndex == gameData.History.Count)
+        {
+            _history = new History();
+            _drinks = new Drinks();
+        }
+        else
+        {
+            _history = gameData.History[gameData.History.Count - 1];
+            _drinks = gameData.History[gameData.History.Count - 1]._Drinks[0];
+        }
+
+        timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
 
         foreach (Button btn in sceneButtons)
         {
@@ -78,8 +107,17 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    void showPromilleOnSceen()
+
+    /*    private void displayPromille(double promille)
+{
+result.text = "" + int_weight;
+result.gameObject.SetActive(true);
+result.text = "Din promille halt = " + System.Math.Round(promille, 2);
+}*/
+    void showPromilleOnSceen(double promille, double untilSober)
     {
+        _textPromille.gameObject.SetActive(true);
+        _textPromille.text = "Din promillehalt är cirka " + System.Math.Round(promille, 2) + ". Du förväntas vara nykter om cirka " + untilSober + "h";
         // visa promille p� sk�rm med max 2 decimaler
         // 
     }
@@ -96,30 +134,49 @@ public class SaveData : MonoBehaviour
         var localTimeDiffrence = (currentTime - startTime);
         int timeDiff = (int)localTimeDiffrence.TotalMinutes;
 
-        currentPromille = promille;
+        currentPromille = _history.promille;
         double gram = getGram(nameButton);
 
         /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
         Sedan addera nya promillehalt från ny dryck*/
-        promille += -(0.15 * timeDiff / 60);
-        promille += (calc.CalculatePromille(ui.sex, ui.weight, gram));
-        double max = System.Math.Max(currentPromille, promille);
+        _history.promille += -(0.15 * timeDiff / 60);
+        _history.promille += (calc.CalculatePromille(ui.sex, ui.weight, gram));
+        double max = System.Math.Max(currentPromille, _history.promille);
         max = System.Math.Round(max, 2);
 
-        double tillNykter = System.Math.Ceiling(promille / 0.15);
+        double tillNykter = System.Math.Ceiling(_history.promille / 0.15);
 
         gameData.age = ui.age;
         gameData.weight = ui.weight;
         gameData.sex = ui.sex;
-        drinkData.GameTime = timeDiff;
-        Debug.Log("CurrentPromille = " + currentPromille + " Promille now = " + promille);
+        _history.GameTime = timeDiff;
+        //Debug.Log("CurrentPromille = " + currentPromille + " Promille now = " + promille);
         //Gör funktion som adderar object till List<DrinkData> drinks   loopa igenom object i listan? skriv inte över!
         if (currentPromille < 0) currentPromille = 0;
 
-        Debug.Log(currentPromille);
+        //Debug.Log(currentPromille);
 
-        drinkData.MaxPromille = max;
+        _history.MaxPromille = max;
+        //drinkData.promille = promille;
         AddDrinks(nameButton);
+
+        //Debug.Log(gameData.History.Count);
+
+        if (gameData.History.Count <= gameData.currentIndex)
+        {
+            gameData.History.Add(_history);
+            _history._Drinks.Add(_drinks);
+
+        }
+        else
+        {
+            gameData.History[gameData.History.Count - 1] = _history;
+            _history._Drinks[0] = _drinks;
+        }
+        _history.dateCreated = timeCreated;
+
+        SaveDataToFile(gameData);
+        showPromilleOnSceen(_history.promille, tillNykter);
 
 
 
@@ -127,30 +184,32 @@ public class SaveData : MonoBehaviour
 
     }
 
-    public void gameOver()
+    public void GameOver()
     {
-        gameData.History.Add(drinkData);
+        gameData.currentIndex++;
         SaveDataToFile(gameData);
-        drinkData = new History();
-        promille = 0;
         SceneManager.LoadScene("Menu");
-
     }
 
     private void AddDrinks(string name)
     {
         if (name == "Button_Beer")
         {
-            drinkData.beer++;
+            //_drinks.beer.Add(timeCreated + index, 1);
+            _drinks.beer++;
         }
         else if (name == "Button_Wine")
         {
-            drinkData.wine++;
+            //_drinks.wine.Add(timeCreated + index, 1);
+            _drinks.wine++;
         }
         else if (name == "Button_Shot")
         {
-            drinkData.shot++;
+            //_drinks.shot.Add(timeCreated + index, 1);
+            _drinks.shot++;
         }
+        //index++;
+
 
     }
 
@@ -182,8 +241,9 @@ public class SaveData : MonoBehaviour
         string dataUser = JsonUtility.ToJson(gameData, true);
         try
         {
+
             System.IO.File.WriteAllText(Application.persistentDataPath + "GameData.json", dataUser);
-            Debug.Log("Data Saved");
+            //Debug.Log("Data Saved");
         }
         catch (Exception e)
         {
@@ -196,7 +256,7 @@ public class SaveData : MonoBehaviour
     {
         try
         {
-            Debug.Log("Data Loaded");
+            //Debug.Log("Data Loaded");
             return JsonUtility.FromJson<UserInfo>(File.ReadAllText(Application.persistentDataPath + "UserData.json"));
         }
         catch (Exception e)
@@ -207,7 +267,7 @@ public class SaveData : MonoBehaviour
     }
     private GameData LoadUserData()
     {
-        Debug.Log("Data Loaded");
+        //Debug.Log("Data Loaded");
         try
         {
             return JsonUtility.FromJson<GameData>(File.ReadAllText(Application.persistentDataPath + "GameData.json"));
