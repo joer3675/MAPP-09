@@ -1,4 +1,4 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,6 +60,7 @@ public class Location
 
 public class SaveData : MonoBehaviour
 {
+    // private GameActiveScript ga;
     [SerializeField] private Text _textPromille;
     private UserInfo ui;
     private GameData gameData;
@@ -77,6 +78,7 @@ public class SaveData : MonoBehaviour
     void Awake()
     {
         calc = gameObject.AddComponent<CalcController>();
+        //ga = gameObject.AddComponent<GameActiveScript>();
 
     }
 
@@ -86,7 +88,7 @@ public class SaveData : MonoBehaviour
     {
         startTime = System.DateTime.Now;
         ui = LoadUserInfo();
-
+        // GameActiveScript.setBoolean(true);
         if (!File.Exists(Application.persistentDataPath + "GameData.json"))
         {
             Debug.Log("file does not exsit");
@@ -195,6 +197,8 @@ result.text = "Din promille halt = " + System.Math.Round(promille, 2);
 
     public void GameOver()
     {
+
+        //GameActiveScript.setBoolean(false);
         gameData.currentIndex++;
         SaveDataToFile(gameData);
         SceneManager.LoadScene("Menu");

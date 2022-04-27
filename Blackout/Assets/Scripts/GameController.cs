@@ -1,12 +1,13 @@
 
-using System.Collections;
-using System.Collections.Generic;
+// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
+
     private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
         }
     }
+
 
 
     private void LoadScene(string sceneName)
@@ -44,6 +46,8 @@ public class GameController : MonoBehaviour
                 return "Menu";
             case "Button_Back":
                 return "Menu";
+            case "Button_Settings":
+                return "StartMenu";
             default:
                 return null;
         }
