@@ -9,13 +9,14 @@ public class HistoryHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var dropdown = transform.GetComponent<Dropdown>();
+        var dropdown = gameObject.GetComponent<Dropdown>();
 
         dropdown.options.Clear();
 
         List<string> items = new List<string>();
         items.Add("2022-04-22");
         items.Add("2022-04-15");
+        items.Add("2022-04-09");
 
         foreach (var item in items)
         {
@@ -32,6 +33,7 @@ public class HistoryHandler : MonoBehaviour
 
         void DropdownItemSelected(Dropdown dropdown)
         {
+        Debug.Log("date");
             int index = dropdown.value;
             TextBox.text = dropdown.options[index].text;
         }
