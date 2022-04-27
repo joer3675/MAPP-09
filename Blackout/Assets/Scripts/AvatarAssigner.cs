@@ -10,7 +10,7 @@ public class AvatarAssigner : MonoBehaviour
 
     ReadUserInput readUserInput;
     UserData userData;
-    [SerializeField] GameObject playerAvatar;
+    GameObject playerAvatar;
     [SerializeField] GameObject manAvatar;
     [SerializeField] GameObject womanAvatar;
     [SerializeField] GameObject nonbinaryAvatar;
