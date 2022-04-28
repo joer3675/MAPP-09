@@ -1,12 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+// [System.Serializable]
+// public class UserData
+// {
+//     public string sex;
+//     public int age, weight;
+// }
+
+
 public class ReadUserInput : MonoBehaviour
 {
-    [SerializeField] private UserData _userData = new UserData();
-    [SerializeField] private SwapScene swapScene;
+    private UserData _userData = new UserData();
+    //[SerializeField] private SwapScene swapScene;
     [SerializeField] private Dropdown dropDownSex;
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
 
@@ -15,29 +23,24 @@ public class ReadUserInput : MonoBehaviour
     {
         int.TryParse(inputFieldAge.text, out _userData.age);
         int.TryParse(inputFieldWeight.text, out _userData.weight);
-
         _userData.sex = dropDownSex.options[dropDownSex.value].text;
-
 
         if (hasInput())
         {
-            //hasNewInput = true;
-            string dataUser = JsonUtility.ToJson(_userData);
+            string dataUser = JsonUtility.ToJson(_userData, true);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
-            swapScene.LoadScene("Menu");
+            SwapScene.LoadScene("Menu");
         }
-        
     }
-
     public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 ? true : false; }
-}
-
-
-[System.Serializable]
-public class UserData
-{
-    public string sex;
-    public int age, weight;
-    //public boolean hasNewInput = false;
 
 }
+
+
+
+
+
+
+
+
+
