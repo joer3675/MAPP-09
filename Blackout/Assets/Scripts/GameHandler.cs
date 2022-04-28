@@ -17,7 +17,7 @@ public class GameHandler : MonoBehaviour
     private DateTime startTime, currentTime;
     private string timeCreated;
     public Button[] sceneButtons;
-
+    private int currentTimeDiff = 0;
     void Awake()
     {
         calc = gameObject.AddComponent<CalcController>();
@@ -78,13 +78,21 @@ public class GameHandler : MonoBehaviour
         /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna currentPromille*/
         var localTimeDiffrence = (currentTime - startTime);
         int timeDiff = (int)localTimeDiffrence.TotalMinutes;
+        Debug.Log(timeDiff + " ::::: " + currentTimeDiff);
 
         currentPromille = _history.promille;
         double gram = getGram(nameButton);
+        if(timeDiff > currentTimeDiff)
+        {
+            timeDiff -= currentTimeDiff;
+            _history.promille += -(0.15 * timeDiff);
+            currentTimeDiff = timeDiff;
+            //timeDiff -= currentTimeDiff;
+        }
 
         /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
         Sedan addera nya promillehalt från ny dryck*/
-        _history.promille += -(0.15 * timeDiff / 60);
+        
         _history.promille += (calc.CalculatePromille(ui.sex, ui.weight, gram));
         double max = System.Math.Max(currentPromille, _history.promille);
         max = System.Math.Round(max, 2);
@@ -110,7 +118,9 @@ public class GameHandler : MonoBehaviour
             gameData.History[gameData.History.Count - 1] = _history;
             _history._Drinks[0] = _drinks;
         }
+        
         _history.dateCreated = timeCreated;
+        Debug.Log(currentPromille);
         DataHandler.SaveDataToFile(gameData);
         showPromilleOnSceen(_history.promille, tillNykter);
     }
@@ -127,15 +137,15 @@ public class GameHandler : MonoBehaviour
         _drinks.numberOfDrinks++;
         if (name == "Button_Beer")
         {
-            _drinks.beer.Add(_drinks.numberOfDrinks, timeCreated);
+            _drinks.beer.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
         else if (name == "Button_Wine")
         {
-            _drinks.wine.Add(_drinks.numberOfDrinks, timeCreated);
+            _drinks.wine.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
         else if (name == "Button_Shot")
         {
-            _drinks.shot.Add(_drinks.numberOfDrinks, timeCreated);
+            _drinks.shot.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
     }
 
