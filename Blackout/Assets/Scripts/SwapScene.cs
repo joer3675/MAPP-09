@@ -7,22 +7,22 @@ public class SwapScene : MonoBehaviour
 {
 
     private static SwapScene swapScene;
-   
+
     void Awake()
     {
- 
+
         DontDestroyOnLoad(this.gameObject);
-        if(swapScene == null){
+        if (swapScene == null)
+        {
             swapScene = this;
-        }else{
-            DestroyObject(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
-
-
-
-    public void LoadScene(string nameOfScene )
-    {     
+    public void LoadScene(string nameOfScene)
+    {
         SceneManager.LoadScene(nameOfScene);
 
     }
