@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneActive.unity
     guid: fe95be203c50e734a950848ab1cf2b3c
+  - enabled: 1
+    path: Assets/Scenes/PromilleCalc.unity
+    guid: ecdcba9e1cd0b461c9cb45ef39a74919
+  - enabled: 1
+    path: Assets/Scenes/StartGame.unity
+    guid: 7cf99d54e8e9b6f44adbeadba4e4e591
+  - enabled: 1
+    path: Assets/Scenes/Timeline.unity
+    guid: cbc46fa7f761d4b9295624c055195105
   m_configObjects: {}
