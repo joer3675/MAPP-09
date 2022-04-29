@@ -9,12 +9,12 @@ public class UserData
     public int age, weight;
 }
 
-[System.Serializable]
-public class UserInfo
-{
-    public string sex;
-    public int age, weight;
-}
+// [System.Serializable]
+// public class UserInfo
+// {
+//     public string sex;
+//     public int age, weight;
+// }
 
 
 [System.Serializable]
@@ -23,7 +23,7 @@ public class GameData
     public string sex;
     public int age, weight;
     public int currentIndex = 0;
-    
+
     public List<History> History = new List<History>();
 
 }
