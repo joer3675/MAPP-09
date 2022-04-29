@@ -19,12 +19,12 @@ public static class DataHandler
         }
     }
 
-    public static UserInfo LoadUserData()
+    public static UserData LoadUserData()
     {
         try
         {
             var jsonObject = (File.ReadAllText(Application.persistentDataPath + "UserData.json"));
-            return JsonConvert.DeserializeObject<UserInfo>(jsonObject);
+            return JsonConvert.DeserializeObject<UserData>(jsonObject);
         }
         catch (Exception e)
         {
