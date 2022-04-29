@@ -13,11 +13,11 @@ public class GameHandler : MonoBehaviour
     private History _history;
     private Drinks _drinks;
     private CalcController calc;
-    private double promille, currentPromille;
+    private double promille, previousPerMille;
     private DateTime startTime, currentTime;
     private string timeCreated;
     public Button[] sceneButtons;
-    private int currentTimeDiff = 0;
+    //private int _history.previousTimeDiff = 0;
     void Awake()
     {
         calc = gameObject.AddComponent<CalcController>();
@@ -27,31 +27,43 @@ public class GameHandler : MonoBehaviour
         tidigare spel. Däremot om användaren väljer att avluta sin session, kommer List<DrinkData> History att ökas med ett nytt objekt*/
     void Start()
     {
-        startTime = System.DateTime.Now;
+        
         ui = DataHandler.LoadUserData();
+        timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
         //// GameActiveScript.setBoolean(true);
-        if (!File.Exists(Application.persistentDataPath + "GameData.json"))
-        {
-            Debug.Log("file does not exsit");
-        }
-        else
+        if (File.Exists(Application.persistentDataPath + "GameData.json"))
         {
             gameData = DataHandler.LoadGameData();
         }
-        if (gameData == null) { gameData = new GameData(); }
+        else
+        {
+            
+            Debug.Log("file does not exsit");
+        }
+        if (gameData == null) { 
+            Debug.Log("gameData null, new gameData created");
+            gameData = new GameData(); }
 
         if (_history == null && gameData.currentIndex == gameData.History.Count)
         {
+            Debug.Log("New Game Started!" );
             _history = new History();
-            _drinks = new Drinks();
+            _drinks = new Drinks(); 
+            _history.timeLastDrink = System.DateTime.Now;
         }
         else
         {
+            bool myBol = _history == null ? true :false;
+            Debug.Log(myBol);
+            Debug.Log("Ongoing Session Loaded");
             _history = gameData.History[gameData.History.Count - 1];
             _drinks = gameData.History[gameData.History.Count - 1]._Drinks[0];
         }
 
-        timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
+        if(_history.promille > 0){
+            showPromilleOnSceen(_history.promille, System.Math.Ceiling(_history.promille / 0.15));
+        }
+      
 
         foreach (Button btn in sceneButtons)
         {
@@ -75,18 +87,19 @@ public class GameHandler : MonoBehaviour
     {
         currentTime = System.DateTime.Now;
 
-        /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna currentPromille*/
-        var localTimeDiffrence = (currentTime - startTime);
+        /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
+        var localTimeDiffrence = (currentTime - _history.timeLastDrink);
         int timeDiff = (int)localTimeDiffrence.TotalMinutes;
-        Debug.Log(timeDiff + " ::::: " + currentTimeDiff);
+        Debug.Log(timeDiff + " ::::: " + _history.previousTimeDiff);
 
-        currentPromille = _history.promille;
+        previousPerMille = _history.promille;
         double gram = getGram(nameButton);
-        if(timeDiff > currentTimeDiff)
+        if(timeDiff > _history.previousTimeDiff)
         {
-            timeDiff -= currentTimeDiff;
-            _history.promille += -(0.15 * timeDiff);
-            currentTimeDiff = timeDiff;
+            timeDiff -= _history.previousTimeDiff;
+            _history.promille += -(0.15 * (double)timeDiff/60);
+            if(_history.promille < 0){_history.promille = 0;}
+            _history.previousTimeDiff = timeDiff;
             //timeDiff -= currentTimeDiff;
         }
 
@@ -94,15 +107,15 @@ public class GameHandler : MonoBehaviour
         Sedan addera nya promillehalt från ny dryck*/
         
         _history.promille += (calc.CalculatePromille(ui.sex, ui.weight, gram));
-        double max = System.Math.Max(currentPromille, _history.promille);
+        double max = System.Math.Max(previousPerMille, _history.promille);
         max = System.Math.Round(max, 2);
-        double tillNykter = System.Math.Ceiling(_history.promille / 0.15);
+        double untilSober = System.Math.Ceiling(_history.promille / 0.15);
         gameData.age = ui.age;
         gameData.weight = ui.weight;
         gameData.sex = ui.sex;
         _history.GameTime = timeDiff;
 
-        if (currentPromille < 0) currentPromille = 0;
+        if (previousPerMille < 0) previousPerMille = 0;
 
         _history.MaxPromille = max;
 
@@ -120,9 +133,9 @@ public class GameHandler : MonoBehaviour
         }
         
         _history.dateCreated = timeCreated;
-        Debug.Log(currentPromille);
+        _history.timeLastDrink = System.DateTime.Now;
         DataHandler.SaveDataToFile(gameData);
-        showPromilleOnSceen(_history.promille, tillNykter);
+        showPromilleOnSceen(_history.promille, untilSober);
     }
 
     public void GameOver()
@@ -131,6 +144,8 @@ public class GameHandler : MonoBehaviour
         DataHandler.SaveDataToFile(gameData);
         SceneManager.LoadScene("Menu");
     }
+
+     
 
     private void AddDrinks(string name)
     {
