@@ -28,15 +28,15 @@ public class HistoryHandler : MonoBehaviour
 
         dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
 
-    }   
+    }
 
 
-        void DropdownItemSelected(Dropdown dropdown)
-        {
+    void DropdownItemSelected(Dropdown dropdown)
+    {
         Debug.Log("date");
-            int index = dropdown.value;
-            TextBox.text = dropdown.options[index].text;
-        }
-    
+        int index = dropdown.value;
+        TextBox.text = dropdown.options[index].text;
+    }
+
 
 }

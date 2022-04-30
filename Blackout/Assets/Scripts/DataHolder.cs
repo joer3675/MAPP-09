@@ -9,14 +9,6 @@ public class UserData
     public int age, weight;
 }
 
-// [System.Serializable]
-// public class UserInfo
-// {
-//     public string sex;
-//     public int age, weight;
-// }
-
-
 [System.Serializable]
 public class GameData
 {

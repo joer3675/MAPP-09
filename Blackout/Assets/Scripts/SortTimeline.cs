@@ -11,7 +11,7 @@ public class SortTimeline : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
 
         var dropdown = gameObject.GetComponent<Dropdown>();
 
@@ -41,11 +41,11 @@ public class SortTimeline : MonoBehaviour
         GameData myData = DataHandler.LoadGameData();
 
 
-        
+
         myDrinks = history._Drinks;
         Debug.Log(myDrinks.Count);
 
-        Dictionary<int, string> myBeer;
+        //Dictionary<int, string> myBeer;
 
         foreach (Drinks drinks in myDrinks)
         {
