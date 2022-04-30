@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System;
+
 
 [System.Serializable]
 public class UserData
@@ -8,19 +10,12 @@ public class UserData
 }
 
 [System.Serializable]
-public class UserInfo
-{
-    public string sex;
-    public int age, weight;
-}
-
-
-[System.Serializable]
 public class GameData
 {
     public string sex;
     public int age, weight;
     public int currentIndex = 0;
+
     public List<History> History = new List<History>();
 
 }
@@ -28,8 +23,10 @@ public class GameData
 [System.Serializable]
 public class History
 {
+
+    public DateTime timeLastDrink;
     public string dateCreated;
-    public int GameTime;
+    public int GameTime, previousTimeDiff;
     public List<Drinks> _Drinks = new List<Drinks>();
     // public int beer = 0;
     // public int wine = 0;
@@ -55,3 +52,4 @@ public class Location
 {
 
 }
+

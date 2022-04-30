@@ -1,16 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-
-
-// [System.Serializable]
-// public class UserData
-// {
-//     public string sex;
-//     public int age, weight;
-// }
-
-
 public class ReadUserInput : MonoBehaviour
 {
     private UserData _userData = new UserData();
