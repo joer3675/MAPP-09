@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour
     {
         foreach (Button btn in sceneOneButtons)
         {
-            btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); Debug.Log(btn.name + " button was pressed"); });
+            btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
         }
     }
 
