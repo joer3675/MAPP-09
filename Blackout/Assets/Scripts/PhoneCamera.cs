@@ -71,14 +71,14 @@ public class PhoneCamera : MonoBehaviour
     public void SaveImage()
     {
         //Create a Texture2D with the size of the rendered image on the screen.
-        Texture2D texture = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
+        Texture2D defaultBackground = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
 
         //Save the image to the Texture2D
-        texture.SetPixels(backCam.GetPixels());
-        texture.Apply();
+        defaultBackground.SetPixels(backCam.GetPixels());
+        defaultBackground.Apply();
 
         //Encode it as a PNG.
-        byte[] bytes = texture.EncodeToPNG();
+        byte[] bytes = defaultBackground.EncodeToPNG();
 
         //Save it in a file.
         File.WriteAllBytes(Application.dataPath + "/images/testimg.png", bytes);
