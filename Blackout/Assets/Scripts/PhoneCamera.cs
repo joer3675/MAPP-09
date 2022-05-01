@@ -9,6 +9,7 @@ public class PhoneCamera : MonoBehaviour
     private bool camAvailable;
     private WebCamTexture backCam = null;
     private Texture defaultBackground;
+    private int index = 0;
 
     public RawImage background;
     public AspectRatioFitter fit;
@@ -64,7 +65,7 @@ public class PhoneCamera : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SaveImage();
-            backCam.Stop();
+            //backCam.Stop();
         }
     }
 
@@ -75,12 +76,40 @@ public class PhoneCamera : MonoBehaviour
 
         //Save the image to the Texture2D
         defaultBackground.SetPixels(backCam.GetPixels());
+        //GetComponent<Renderer>().material.mainTexture = defaultBackground;
+
+        //for (int y = 0; y < defaultBackground.height; y++)
+        //{
+        //    for (int x = 0; x < defaultBackground.width; x++)
+        //    {
+        //        Color color = ((x & y) != 0 ? Color.white : Color.gray);
+        //        defaultBackground.SetPixel(x, y, color);
+        //    }
+        //}
         defaultBackground.Apply();
 
         //Encode it as a PNG.
         byte[] bytes = defaultBackground.EncodeToPNG();
 
         //Save it in a file.
-        File.WriteAllBytes(Application.dataPath + "/images/testimg.png", bytes);
+        File.WriteAllBytes(Application.persistentDataPath + "blackout_image.png", bytes);
+        //index++;
     }
+
+    //private Texture2D ManipulatePixels()
+    //{
+    //    Texture2D texture = new Texture2D(128, 128);
+    //    GetComponent<Renderer>().material.mainTexture = texture;
+
+    //    for (int y = 0; y < texture.height; y++)
+    //    {
+    //        for (int x = 0; x < texture.width; x++)
+    //        {
+    //            Color color = ((x & y) != 0 ? Color.white : Color.gray);
+    //            texture.SetPixel(x, y, color);
+    //        }
+    //    }
+    //    texture.Apply();
+    //    return texture;
+    //}
 }
