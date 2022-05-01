@@ -102,7 +102,7 @@ public class SortButtonScript : MonoBehaviour
         {
             foreach (Drinks drink in history._Drinks)
             {
-                tempText += "Max Promille = " + history.MaxPromille + " at " + history.dateCreated + " \n\n";
+                tempText += history.dateCreated + " and you had a max per mille at " + history.MaxPromille + " \n\n";
                 foreach (KeyValuePair<string, string> kvp in drink.drinks)
                 {
                     tempText += kvp.Key + "  " + kvp.Value + " \n\n";
