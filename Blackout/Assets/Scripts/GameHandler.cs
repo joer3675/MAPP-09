@@ -156,17 +156,29 @@ public class GameHandler : MonoBehaviour
     private void AddDrinks(string name)
     {
         _drinks.numberOfDrinks++;
+        // if (name == "Button_Beer")
+        // {
+        //     _drinks.beer.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+        // }
+        // else if (name == "Button_Wine")
+        // {
+        //     _drinks.wine.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+        // }
+        // else if (name == "Button_Shot")
+        // {
+        //     _drinks.shot.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+        // }
         if (name == "Button_Beer")
         {
-            _drinks.beer.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+            _drinks.drinks.Add(_drinks.numberOfDrinks + " Beer", currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
         else if (name == "Button_Wine")
         {
-            _drinks.wine.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+            _drinks.drinks.Add(_drinks.numberOfDrinks + " Wine", currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
         else if (name == "Button_Shot")
         {
-            _drinks.shot.Add(_drinks.numberOfDrinks, currentTime.ToString("dd-MM-yyyy HH:mm"));
+            _drinks.drinks.Add(_drinks.numberOfDrinks + " Shot", currentTime.ToString("dd-MM-yyyy HH:mm"));
         }
     }
 

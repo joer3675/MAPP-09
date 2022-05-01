@@ -39,9 +39,10 @@ public class History
 public class Drinks
 {
     public int numberOfDrinks = 0;
-    public Dictionary<int, string> beer = new Dictionary<int, string>();
-    public Dictionary<int, string> wine = new Dictionary<int, string>();
-    public Dictionary<int, string> shot = new Dictionary<int, string>();
+    public Dictionary<string, string> drinks = new Dictionary<string, string>();
+    //public Dictionary<int, string> beer = new Dictionary<int, string>();
+    // public Dictionary<int, string> wine = new Dictionary<int, string>();
+    // public Dictionary<int, string> shot = new Dictionary<int, string>();
     // public int beer = 0;
     // public int wine = 0;
     // public int shot = 0;
