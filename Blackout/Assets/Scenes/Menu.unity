@@ -1368,6 +1368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2000068278}
   - component: {fileID: 2000068279}
+  - component: {fileID: 2000068280}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1406,3 +1407,16 @@ MonoBehaviour:
   - {fileID: 1257015451}
   - {fileID: 50684288}
   - {fileID: 11254219}
+--- !u!114 &2000068280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000068277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461b5b10945a45f408e6b282f1b54302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 213243893}
