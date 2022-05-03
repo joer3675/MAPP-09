@@ -294,7 +294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vikt...
+  m_Text: Weight...
 --- !u!222 &110867212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Promille kalkylator
+  m_Text: Per Mille Calculator
 --- !u!222 &169231556
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -903,7 +903,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hur mycket har du druckit?
+  m_Text: What did you drink?
 --- !u!222 &567943883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -982,7 +982,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xD6l"
+  m_Text: Beer
 --- !u!222 &571712143
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kvinna
+  m_Text: Female
 --- !u!222 &694307784
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2370,7 +2370,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: hejhej
+  m_Text: Res
 --- !u!1 &1383847184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,7 +2735,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vin
+  m_Text: Wine
 --- !u!222 &1644808805
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3039,9 +3039,9 @@ MonoBehaviour:
   m_Value: 1
   m_Options:
     m_Options:
-    - m_Text: Man
+    - m_Text: Male
       m_Image: {fileID: 0}
-    - m_Text: Kvinna
+    - m_Text: Female
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3605,7 +3605,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "R\xE4kna ut %"
+  m_Text: Calc
 --- !u!222 &2053198247
 CanvasRenderer:
   m_ObjectHideFlags: 0

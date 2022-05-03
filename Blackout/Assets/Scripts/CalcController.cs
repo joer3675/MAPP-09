@@ -92,7 +92,7 @@ public class CalcController : MonoBehaviour
     {
         result.text = "" + int_weight;
         result.gameObject.SetActive(true);
-        result.text = "Din promille halt = " + System.Math.Round(promille, 2);
+        result.text = "Your Per Mille is about " + System.Math.Round(promille, 2);
     }
 
 

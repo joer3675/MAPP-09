@@ -1,42 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
 
-public class HistoryHandler : MonoBehaviour
-{
-    public Text TextBox;
-    // Start is called before the first frame update
-    void Start()
-    {
-        var dropdown = gameObject.GetComponent<Dropdown>();
+// public class HistoryHandler : MonoBehaviour
+// {
+//     public Text TextBox;
+//     // Start is called before the first frame update
+//     void Start()
+//     {
+//         var dropdown = gameObject.GetComponent<Dropdown>();
 
-        dropdown.options.Clear();
+//         dropdown.options.Clear();
 
-        List<string> items = new List<string>();
-        items.Add("2022-04-22");
-        items.Add("2022-04-15");
-        items.Add("2022-04-09");
+//         List<string> items = new List<string>();
+//         items.Add("2022-04-22");
+//         items.Add("2022-04-15");
+//         items.Add("2022-04-09");
 
-        foreach (var item in items)
-        {
-            dropdown.options.Add(new Dropdown.OptionData() { text = item });
-        }
+//         foreach (var item in items)
+//         {
+//             dropdown.options.Add(new Dropdown.OptionData() { text = item });
+//         }
 
-        DropdownItemSelected(dropdown);
-
-
-        dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
-
-    }
+//         DropdownItemSelected(dropdown);
 
 
-    void DropdownItemSelected(Dropdown dropdown)
-    {
-        Debug.Log("date");
-        int index = dropdown.value;
-        TextBox.text = dropdown.options[index].text;
-    }
+//         dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
+
+//     }
 
 
-}
+//     void DropdownItemSelected(Dropdown dropdown)
+//     {
+//         Debug.Log("date");
+//         int index = dropdown.value;
+//         TextBox.text = dropdown.options[index].text;
+//     }
+
+
+// }

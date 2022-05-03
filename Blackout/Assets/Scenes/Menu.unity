@@ -925,7 +925,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Inst\xE4llningar"
+  m_Text: Settings
 --- !u!222 &1174558915
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1125,7 +1125,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tidslinje
+  m_Text: History
 --- !u!222 &1369393242
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1204,7 +1204,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Ber\xE4kna Promille"
+  m_Text: Calc Per Mille
 --- !u!222 &1654916970
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1349,7 +1349,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Let's Start
+  m_Text: Start Night
 --- !u!222 &1703896588
 CanvasRenderer:
   m_ObjectHideFlags: 0

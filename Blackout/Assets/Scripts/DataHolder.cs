@@ -12,8 +12,8 @@ public class UserData
 [System.Serializable]
 public class GameData
 {
-    public string sex;
-    public int age, weight;
+    // public string sex;
+    // public int age, weight;
     public int currentIndex = 0;
 
     public List<History> History = new List<History>();
@@ -26,7 +26,7 @@ public class History
 
     public DateTime timeLastDrink;
     public string dateCreated;
-    public int GameTime, previousTimeDiff;
+    public double previousTimeDiff;
     public List<Drinks> _Drinks = new List<Drinks>();
     // public int beer = 0;
     // public int wine = 0;
