@@ -11,11 +11,13 @@ public class CalcController : MonoBehaviour
     [SerializeField] private InputField inputFieldBeer;
     [SerializeField] private InputField inputFieldWine;
     [SerializeField] private InputField inputFieldShot;
+    [SerializeField] private InputField inputFieldTime;
 
     private int int_weight;
     private int int_beer;
     private int int_wine;
     private int int_shot;
+    private int int_time;
 
     private double beer = 13.2; //33cl, 5%  https://alkompassen.se/promilleraknare
     private double wine = 16.2; //15cl, 13.5% https://alkompassen.se/promilleraknare
@@ -41,6 +43,7 @@ public class CalcController : MonoBehaviour
         int.TryParse(inputFieldBeer.text, out int_beer);
         int.TryParse(inputFieldWine.text, out int_wine);
         int.TryParse(inputFieldShot.text, out int_shot);
+        int.TryParse(inputFieldTime.text, out int_time);
 
     }
 
@@ -69,11 +72,11 @@ public class CalcController : MonoBehaviour
 
         if (_sex == "Kvinna")
         {
-            currentPromillehalt = gram / (weight * 0.62); //alkoholförbränning.se vart 0.62 och 0.71 kommer från
+            currentPromillehalt = gram / (weight * 0.62) - (0.15 * int_time); //alkoholförbränning.se vart 0.62 och 0.71 kommer från
         }
         else
         {
-            currentPromillehalt = gram / (weight * 0.71);
+            currentPromillehalt = gram / (weight * 0.71) - (0.15 * int_time);
         }
 
         /* En cirka ekvation för att beräkna x h till 0 promille i blodet */
