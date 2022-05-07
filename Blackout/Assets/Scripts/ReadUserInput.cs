@@ -9,12 +9,17 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private Sprite girl;
     [SerializeField] private Sprite girlPressed;
     [SerializeField] private Button[] buttonSex;
-
+    [SerializeField] private Slider sliderAge;
+    [SerializeField] private Slider sliderWeight;
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
+    [SerializeField] private Text slidebarAgeText;
+    [SerializeField] private Text slidebarWeightText;
 
 
     void Start()
     {
+        slidebarAgeText.text = sliderAge.value.ToString();
+        slidebarWeightText.text = sliderWeight.value.ToString();
         foreach (Button button in buttonSex)
         {
             button.onClick.AddListener(() => SetGender(button));
@@ -22,8 +27,10 @@ public class ReadUserInput : MonoBehaviour
     }
     public void SaveToJson()
     {
-        int.TryParse(inputFieldAge.text, out _userData.age);
-        int.TryParse(inputFieldWeight.text, out _userData.weight);
+        //int.TryParse(inputFieldAge.text, out _userData.age);
+        _userData.age = (int)sliderAge.value;
+        _userData.weight = (int)sliderWeight.value;
+        //int.TryParse(inputFieldWeight.text, out _userData.weight);
         //_userData.sex = dropDownSex.options[dropDownSex.value].text;
 
         if (hasInput())
@@ -61,6 +68,11 @@ public class ReadUserInput : MonoBehaviour
         }
     }
 
+    public void OnSildeBarTextChange()
+    {
+        slidebarAgeText.text = sliderAge.value.ToString();
+        slidebarWeightText.text = sliderWeight.value.ToString();
+    }
 }
 
 
