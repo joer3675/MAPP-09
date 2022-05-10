@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class Transition : MonoBehaviour
 {
     public Animator animator;
-    public float transitionDelayTime = 0.5f;
+    public float transitionDelayTime = 0.8f;
+    
 
     void Awake()
     {
