@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endNightSound: {fileID: 682507788}
+  startNightSound: {fileID: 0}
 --- !u!1 &463310944
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +703,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4daf31ab9f1b44254a2fbb625e19e47a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7b3752413e4704c548295af94a5e942e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.69
   m_Pitch: 1
@@ -1664,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485422028048084503, guid: 4268b8635d0b8004d97bf8f50288cd1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: playSoundEffect
+      value: playSoundEffectEnd
       objectReference: {fileID: 0}
     - target: {fileID: 8485422028048084503, guid: 4268b8635d0b8004d97bf8f50288cd1b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName

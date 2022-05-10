@@ -6,6 +6,7 @@ public class PlaySound : MonoBehaviour
 {
 
     public AudioSource endNightSound;
+    public AudioSource startNightSound;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +20,14 @@ public class PlaySound : MonoBehaviour
         
     }
 
-    public void playSoundEffect() {
+    public void playSoundEffectEnd() {
 
 
         endNightSound.Play();
+    }
+
+    public void playSoundEffectStart()
+    {
+        startNightSound.Play();
     }
 }
