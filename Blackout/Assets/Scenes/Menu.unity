@@ -536,7 +536,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9040403615016835335, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040403616129582872, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6734816600572358547, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
 --- !u!1 &213243892
 GameObject:
@@ -1626,6 +1635,7 @@ MonoBehaviour:
   - {fileID: 1257015451}
   - {fileID: 50684288}
   - {fileID: 11254219}
+  transitionDelayTime: 0.8
 --- !u!114 &2000068280
 MonoBehaviour:
   m_ObjectHideFlags: 0
