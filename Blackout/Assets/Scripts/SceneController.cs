@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
     // private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
+
     // void Awake()
     // {
     //     swapScene = GameObject.FindObjectOfType<SwapScene>();
@@ -14,6 +15,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
@@ -23,7 +25,7 @@ public class SceneController : MonoBehaviour
     private void LoadScene(string sceneName)
     {
 
-        if (sceneName != null) SwapScene.LoadScene(sceneName);
+        if (sceneName != null ) SwapScene.LoadScene(sceneName);
     }
 
     private string getSceneName(string buttonName)
