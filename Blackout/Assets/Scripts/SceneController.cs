@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +8,25 @@ public class SceneController : MonoBehaviour
     // private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
+    //private Animator animator;
+    public float transitionDelayTime = 0.1f;
+
+    //private GameObject gameObject;
+
     // void Awake()
     // {
     //     swapScene = GameObject.FindObjectOfType<SwapScene>();
     // }
 
+    //private void Awake()
+    //{
+        //animator = GetComponent<Animator>();
+    //}
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
@@ -24,7 +36,11 @@ public class SceneController : MonoBehaviour
     private void LoadScene(string sceneName)
     {
 
-        if (sceneName != null) SwapScene.LoadScene(sceneName);
+        if (sceneName != null)
+        {
+            StartCoroutine(DelayLoadLevel(sceneName));
+            //SwapScene.LoadScene(sceneName);
+        }
     }
 
     private string getSceneName(string buttonName)
@@ -46,5 +62,14 @@ public class SceneController : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    IEnumerator DelayLoadLevel(string sceneName)
+    {
+        Debug.Log("hhhhhhhhhhh");
+        //animator.SetTrigger("TriggerTransition");
+        yield return new WaitForSeconds(transitionDelayTime);
+        SwapScene.LoadScene(sceneName);
+        //SwapScene.LoadScene(nameOfScene);
     }
 }
