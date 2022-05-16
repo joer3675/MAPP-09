@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
-
+    private Animator anim;
     // private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
