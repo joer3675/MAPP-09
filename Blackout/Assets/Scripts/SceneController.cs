@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     public Button[] sceneOneButtons;
 
     //private Animator animator;
-    public float transitionDelayTime = 3.0f;
+    public float transitionDelayTime = 0.1f;
 
     //private GameObject gameObject;
 
