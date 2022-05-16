@@ -25,7 +25,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         
         foreach (Button btn in sceneOneButtons)
         {
