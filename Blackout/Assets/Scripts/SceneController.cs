@@ -4,14 +4,19 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
-    private Animator anim;
+    [SerializeField] private Animator anim;
+    //[SerializeField] private Canvas canvas;
     // private SwapScene swapScene;
     public Button[] sceneOneButtons;
 
     //private Animator animator;
-    public float transitionDelayTime = 0.1f;
+    private float transitionDelayTime = 1.5f;
 
     //private GameObject gameObject;
+    // void Awake()
+    // {
+    //     anim.SetTrigger("Out");
+    // }
 
     // void Awake()
     // {
@@ -20,13 +25,16 @@ public class SceneController : MonoBehaviour
 
     //private void Awake()
     //{
-        //animator = GetComponent<Animator>();
+    //animator = GetComponent<Animator>();
     //}
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        
+        //anim = GetComponent<Animator>();
+
+        anim.SetTrigger("Out");
+        // canvas.enabled = false;
+        Debug.Log("Out");
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
@@ -35,9 +43,13 @@ public class SceneController : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
+        Debug.Log("In");
+        //canvas.enabled = true;
+        //anim.SetTrigger("In");
 
         if (sceneName != null)
         {
+
             StartCoroutine(DelayLoadLevel(sceneName));
             //SwapScene.LoadScene(sceneName);
         }
@@ -67,7 +79,7 @@ public class SceneController : MonoBehaviour
     IEnumerator DelayLoadLevel(string sceneName)
     {
         Debug.Log("hhhhhhhhhhh");
-        //animator.SetTrigger("TriggerTransition");
+        anim.SetTrigger("In");
         yield return new WaitForSeconds(transitionDelayTime);
         SwapScene.LoadScene(sceneName);
         //SwapScene.LoadScene(nameOfScene);
