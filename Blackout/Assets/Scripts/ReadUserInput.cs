@@ -14,6 +14,9 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
     [SerializeField] private Text slidebarAgeText;
     [SerializeField] private Text slidebarWeightText;
+    [SerializeField] private AudioSource soundGirlHello;
+    [SerializeField] private AudioSource soundBoyHello;
+
 
 
     void Start()
@@ -58,11 +61,13 @@ public class ReadUserInput : MonoBehaviour
         }
         if (btn.name == "Button_Male")
         {
+            soundBoyHello.Play();
             btn.GetComponent<Image>().sprite = boyPressed;
             _userData.sex = "Male";
         }
         else
         {
+            soundGirlHello.Play();
             btn.GetComponent<Image>().sprite = girlPressed;
             _userData.sex = "Female";
         }
