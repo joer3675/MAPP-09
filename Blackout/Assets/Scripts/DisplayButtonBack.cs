@@ -14,12 +14,12 @@ public class DisplayButtonBack : MonoBehaviour
         //userData = gameObject.AddComponent<ReadUserInput>();
         if (File.Exists(Application.persistentDataPath + "UserData.json"))
         {
-            Debug.Log("here");
+
             _buttonBack.gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("BUUUU!!");
+
             _buttonBack.gameObject.SetActive(false);
         }
 
