@@ -76,24 +76,14 @@ public class PhoneCamera : MonoBehaviour
 
         //Save the image to the Texture2D
         defaultBackground.SetPixels(backCam.GetPixels());
-        //GetComponent<Renderer>().material.mainTexture = defaultBackground;
-
-        //for (int y = 0; y < defaultBackground.height; y++)
-        //{
-        //    for (int x = 0; x < defaultBackground.width; x++)
-        //    {
-        //        Color color = ((x & y) != 0 ? Color.white : Color.gray);
-        //        defaultBackground.SetPixel(x, y, color);
-        //    }
-        //}
         defaultBackground.Apply();
 
         //Encode it as a PNG.
         byte[] bytes = defaultBackground.EncodeToPNG();
 
         //Save it in a file.
-        File.WriteAllBytes(Application.persistentDataPath + "blackout_image.png", bytes);
-        //index++;
+        File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
+        index++;
     }
 
     //private Texture2D ManipulatePixels()
