@@ -43,7 +43,7 @@ public class ReadUserInput : MonoBehaviour
             SwapScene.LoadScene("Menu");
         }
     }
-    public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 ? true : false; }
+    public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 && _userData.sex != null ? true : false; }
 
     private void SetGender(Button btn)
     {

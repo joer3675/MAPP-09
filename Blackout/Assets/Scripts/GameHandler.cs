@@ -100,11 +100,15 @@ public class GameHandler : MonoBehaviour
         _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + ". Expected to be sober " + clockASober.ToString("HH:mm"); // "day" + toString(dddd HH:mm)
     }
 
-    private double getPerMille()
+    public double getPerMille()
     {
         double perMille = (_history.promille - 0.15 * getTimeDiffrence() / 60);
         // Debug.Log(perMille + " permille");
         return perMille <= 0 ? 0 : perMille;
+    }
+    public string getGender()
+    {
+        return sex;
     }
 
     public void calcPromille(string nameButton)
