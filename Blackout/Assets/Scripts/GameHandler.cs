@@ -168,6 +168,7 @@ public class GameHandler : MonoBehaviour
         DataHandler.SaveDataToFile(gameData);
         PlayerPrefs.SetInt("hasStarted", 0); ;
         SceneManager.LoadScene("Menu");
+        Debug.Log("Game has ended");
     }
 
     private void displayEndCanvasQuestion()

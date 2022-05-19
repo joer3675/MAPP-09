@@ -30,11 +30,11 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        //anim = GetComponent<Animator>();
+
 
         anim.SetTrigger("Out");
-        // canvas.enabled = false;
-        Debug.Log("Out");
+
+
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
@@ -43,15 +43,12 @@ public class SceneController : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        Debug.Log("In");
-        //canvas.enabled = true;
-        //anim.SetTrigger("In");
 
         if (sceneName != null)
         {
 
             StartCoroutine(DelayLoadLevel(sceneName));
-            //SwapScene.LoadScene(sceneName);
+
         }
     }
 
@@ -78,10 +75,10 @@ public class SceneController : MonoBehaviour
 
     IEnumerator DelayLoadLevel(string sceneName)
     {
-        Debug.Log("hhhhhhhhhhh");
+
         anim.SetTrigger("In");
         yield return new WaitForSeconds(transitionDelayTime);
         SwapScene.LoadScene(sceneName);
-        //SwapScene.LoadScene(nameOfScene);
+
     }
 }
