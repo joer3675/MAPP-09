@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
+    [SerializeField] private Canvas canvasQuestion;
+    [SerializeField] private Button buttonMessageYes;
+    [SerializeField] private Button buttonMessageNo;
     [SerializeField] private Text _textPromille;
     private UserData userData;
     private GameData gameData;
@@ -164,11 +167,32 @@ public class GameHandler : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("hasStarted") == 1)
         {
-            gameData.currentIndex++;
-            DataHandler.SaveDataToFile(gameData);
-            PlayerPrefs.SetInt("hasStarted", 0); ;
-            SceneManager.LoadScene("Menu");
+
+            displayEndCanvasQuestion();
+
         }
+    }
+    private void EndGame()
+    {
+        gameData.currentIndex++;
+        DataHandler.SaveDataToFile(gameData);
+        PlayerPrefs.SetInt("hasStarted", 0); ;
+        SceneManager.LoadScene("Menu");
+    }
+
+    private void displayEndCanvasQuestion()
+    {
+        canvasQuestion.gameObject.SetActive(true);
+
+        buttonMessageYes.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+            EndGame();
+        });
+        buttonMessageNo.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+        });
     }
 
     private double getTimeDiffrence()
