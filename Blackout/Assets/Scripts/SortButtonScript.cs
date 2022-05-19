@@ -177,7 +177,7 @@ public class SortButtonScript : MonoBehaviour
                     else
                     {
                         currentHistoryList.Add(history);
-                        buttonPrefabList[i++].GetComponentInChildren<Text>().text = history.MaxPromille.ToString();
+                        buttonPrefabList[i++].GetComponentInChildren<Text>().text = history.MaxPromille.ToString() + " %";
                     }
 
 
