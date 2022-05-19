@@ -20,6 +20,7 @@ public class AvatarScript : MonoBehaviour
 
     void Start()
     {
+
         gender = gameHandler.getGender();
         if (gender.Equals("Male"))
         {
