@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour
     public Button[] sceneOneButtons;
 
     //private Animator animator;
-    private float transitionDelayTime = 1.5f;
+    private float transitionDelayTime = 1.0f;
 
     //private GameObject gameObject;
     // void Awake()
