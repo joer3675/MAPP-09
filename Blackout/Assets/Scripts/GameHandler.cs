@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
+    [SerializeField] private SceneController sceneController;
     [SerializeField] private Canvas canvasQuestion;
     [SerializeField] private Button buttonMessageYes;
     [SerializeField] private Button buttonMessageNo;
@@ -167,7 +168,7 @@ public class GameHandler : MonoBehaviour
         gameData.currentIndex++;
         DataHandler.SaveDataToFile(gameData);
         PlayerPrefs.SetInt("hasStarted", 0); ;
-        SceneManager.LoadScene("Menu");
+        sceneController.LoadScene("Menu");
         Debug.Log("Game has ended");
     }
 

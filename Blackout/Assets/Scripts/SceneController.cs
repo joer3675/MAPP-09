@@ -5,28 +5,11 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-    //[SerializeField] private Canvas canvas;
-    // private SwapScene swapScene;
+
     public Button[] sceneOneButtons;
 
-    //private Animator animator;
     private float transitionDelayTime = 1.0f;
 
-    //private GameObject gameObject;
-    // void Awake()
-    // {
-    //     anim.SetTrigger("Out");
-    // }
-
-    // void Awake()
-    // {
-    //     swapScene = GameObject.FindObjectOfType<SwapScene>();
-    // }
-
-    //private void Awake()
-    //{
-    //animator = GetComponent<Animator>();
-    //}
 
     void Start()
     {
@@ -41,7 +24,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    private void LoadScene(string sceneName)
+    public void LoadScene(string sceneName)
     {
 
         if (sceneName != null)

@@ -688,6 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c16e303803431843a49cfd08f866d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneController: {fileID: 622674781}
   canvasQuestion: {fileID: 744774935}
   buttonMessageYes: {fileID: 1374132527}
   buttonMessageNo: {fileID: 310684377}

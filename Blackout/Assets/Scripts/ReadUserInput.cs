@@ -16,11 +16,13 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private Text slidebarWeightText;
     [SerializeField] private AudioSource soundGirlHello;
     [SerializeField] private AudioSource soundBoyHello;
+    [SerializeField] private SceneController sceneController;
 
 
 
     void Start()
     {
+
         slidebarAgeText.text = sliderAge.value.ToString();
         slidebarWeightText.text = sliderWeight.value.ToString();
         foreach (Button button in buttonSex)
@@ -30,17 +32,15 @@ public class ReadUserInput : MonoBehaviour
     }
     public void SaveToJson()
     {
-        //int.TryParse(inputFieldAge.text, out _userData.age);
         _userData.age = (int)sliderAge.value;
         _userData.weight = (int)sliderWeight.value;
-        //int.TryParse(inputFieldWeight.text, out _userData.weight);
-        //_userData.sex = dropDownSex.options[dropDownSex.value].text;
 
         if (hasInput())
         {
             string dataUser = JsonUtility.ToJson(_userData, true);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
-            SwapScene.LoadScene("Menu");
+            sceneController.LoadScene("Menu");
+
         }
     }
     public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 && _userData.sex != null ? true : false; }
