@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
-using UnityEngine.SceneManagement;
+
 
 public class GameHandler : MonoBehaviour
 {
@@ -81,22 +81,22 @@ public class GameHandler : MonoBehaviour
         weight = userData.weight;
         sex = userData.sex;
 
-
         foreach (Button btn in sceneButtons)
         {
             btn.onClick.AddListener(() => calcPromille(btn.name));
         }
     }
 
-    void showPromilleOnSceen(double promille, double untilSober)
+
+    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter*/
+    private void showPromilleOnSceen(double promille, double untilSober)
     {
         promille = Math.Round(promille, 2);
         untilSober = Math.Round(untilSober, 2);
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
-
-        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + ". Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
+        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
     }
 
     public double getPerMille()
@@ -109,20 +109,19 @@ public class GameHandler : MonoBehaviour
         return sex;
     }
 
+    /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
+    Sedan addera nya promillehalt från ny dryck. Sparar sedan ned all "gameData" till en Json fil som lagras på filvägen "Application.persistentDataPath".*/
     public void calcPromille(string nameButton)
     {
         PlayerPrefs.SetInt("hasStarted", 1);
         if (_history.promille < 0) _history.promille = 0;
-        /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
-        Sedan addera nya promillehalt från ny dryck*/
+
         double gram = getGram(nameButton);
         _history.promille += (calc.CalculatePromille(sex, weight, gram));
 
         double max = System.Math.Max(previousPerMille, _history.promille);
         max = System.Math.Round(max, 2);
-        //double untilSober = System.Math.Ceiling(_history.promille / 0.15);
 
-        //_history.GameTime = getTimeDiffrence();
         double timeD = getTimeDiffrence();
         if (timeD > 0 && _history.promille > 0)
         {
@@ -132,9 +131,7 @@ public class GameHandler : MonoBehaviour
 
         double untilSober = _history.promille / 0.15;
         previousPerMille = _history.promille;
-
         _history.MaxPromille = max;
-
         AddDrinks(nameButton);
 
         if (gameData.History.Count <= gameData.currentIndex)
@@ -154,7 +151,8 @@ public class GameHandler : MonoBehaviour
         showPromilleOnSceen(_history.promille, untilSober);
     }
 
-    // När användaren väljer att klicka på "End"
+    /* När användaren väljer att klicka på "End-knappen". 
+    Kollar om det spelet är igång, ge användaren alternativ att avsluta eller inte */
     public void GameOver()
     {
         if (PlayerPrefs.GetInt("hasStarted") == 1)
@@ -187,10 +185,11 @@ public class GameHandler : MonoBehaviour
         });
     }
 
+    /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
-        /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
+
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
         double timeDiff = localTimeDiffrence.Minutes;
 
@@ -202,6 +201,7 @@ public class GameHandler : MonoBehaviour
         return timeDiff;
     }
 
+    /*Adderar en drink till en klass som håller data av drycker som sparas ned i JSON format*/
     private void AddDrinks(string name)
     {
         _drinks.numberOfDrinks++;
@@ -219,6 +219,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    /*Alkohol i gram från en öl,vin eller shot hämtad från Klassen CalController*/
     private double getGram(string name)
     {
         switch (name)

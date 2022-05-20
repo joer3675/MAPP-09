@@ -18,7 +18,8 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private AudioSource soundBoyHello;
     [SerializeField] private SceneController sceneController;
 
-
+    /*Detta script används då användaren ska skapa en "profil". Läser in all information som användaren väljer, samt sparar ned det till en Json fil.
+    Spelar även lite ljud när användaren väljer att klicka på valet av kille eller tjej, samt visar vilket val som gjorts*/
 
     void Start()
     {

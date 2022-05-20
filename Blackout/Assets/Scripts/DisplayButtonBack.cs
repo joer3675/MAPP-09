@@ -5,11 +5,9 @@ using UnityEngine.UI;
 public class DisplayButtonBack : MonoBehaviour
 {
     [SerializeField] private Button _buttonBack;
-    //private ReadUserInput userData;
-    // Start is called before the first frame update
+
     void Awake()
     {
-        //userData = gameObject.AddComponent<ReadUserInput>();
         if (File.Exists(Application.persistentDataPath + "UserData.json"))
         {
 
