@@ -190,14 +190,17 @@ public class GameHandler : MonoBehaviour
     {
         currentTime = System.DateTime.Now;
 
+
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
-        double timeDiff = localTimeDiffrence.Minutes;
+
+        double timeDiff = localTimeDiffrence.TotalMinutes;
 
         if (timeDiff > _history.previousTimeDiff)
         {
             timeDiff -= _history.previousTimeDiff;
             _history.previousTimeDiff = timeDiff;
         }
+
         return timeDiff;
     }
 
