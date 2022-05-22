@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 public class ReadUserInput : MonoBehaviour
 {
     private UserData _userData = new UserData();
@@ -11,7 +10,6 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private Button[] buttonSex;
     [SerializeField] private Slider sliderAge;
     [SerializeField] private Slider sliderWeight;
-    [SerializeField] private InputField inputFieldAge, inputFieldWeight;
     [SerializeField] private Text slidebarAgeText;
     [SerializeField] private Text slidebarWeightText;
     [SerializeField] private AudioSource soundGirlHello;
@@ -38,8 +36,10 @@ public class ReadUserInput : MonoBehaviour
 
         if (hasInput())
         {
-            string dataUser = JsonUtility.ToJson(_userData, true);
-            System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
+            DataHandler.SaveUserDataToFile(_userData);
+            // string dataUser = JsonUtility.ToJson(_userData, true);
+            // System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
+
             sceneController.LoadScene("Menu");
 
         }
@@ -48,6 +48,7 @@ public class ReadUserInput : MonoBehaviour
 
     private void SetGender(Button btn)
     {
+
         foreach (Button b in buttonSex)
         {
             if (b.name == "Button_Female")
