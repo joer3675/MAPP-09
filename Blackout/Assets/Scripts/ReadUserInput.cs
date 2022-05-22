@@ -14,16 +14,10 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private InputField inputFieldAge, inputFieldWeight;
     [SerializeField] private Text slidebarAgeText;
     [SerializeField] private Text slidebarWeightText;
-    [SerializeField] private AudioSource soundGirlHello;
-    [SerializeField] private AudioSource soundBoyHello;
-    [SerializeField] private SceneController sceneController;
 
-    /*Detta script används då användaren ska skapa en "profil". Läser in all information som användaren väljer, samt sparar ned det till en Json fil.
-    Spelar även lite ljud när användaren väljer att klicka på valet av kille eller tjej, samt visar vilket val som gjorts*/
 
     void Start()
     {
-
         slidebarAgeText.text = sliderAge.value.ToString();
         slidebarWeightText.text = sliderWeight.value.ToString();
         foreach (Button button in buttonSex)
@@ -33,18 +27,20 @@ public class ReadUserInput : MonoBehaviour
     }
     public void SaveToJson()
     {
+        //int.TryParse(inputFieldAge.text, out _userData.age);
         _userData.age = (int)sliderAge.value;
         _userData.weight = (int)sliderWeight.value;
+        //int.TryParse(inputFieldWeight.text, out _userData.weight);
+        //_userData.sex = dropDownSex.options[dropDownSex.value].text;
 
         if (hasInput())
         {
             string dataUser = JsonUtility.ToJson(_userData, true);
             System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
-            sceneController.LoadScene("Menu");
-
+            SwapScene.LoadScene("Menu");
         }
     }
-    public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 && _userData.sex != null ? true : false; }
+    public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 ? true : false; }
 
     private void SetGender(Button btn)
     {
@@ -62,13 +58,11 @@ public class ReadUserInput : MonoBehaviour
         }
         if (btn.name == "Button_Male")
         {
-            soundBoyHello.Play();
             btn.GetComponent<Image>().sprite = boyPressed;
             _userData.sex = "Male";
         }
         else
         {
-            soundGirlHello.Play();
             btn.GetComponent<Image>().sprite = girlPressed;
             _userData.sex = "Female";
         }

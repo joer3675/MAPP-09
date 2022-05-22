@@ -6,7 +6,7 @@ using System;
 
 public class HistoryHandler : MonoBehaviour
 {
-
+    //private 
     private GameData gameData;
     public Text TextBox;
     // Start is called before the first frame update

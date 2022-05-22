@@ -2,28 +2,44 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*Detta script ser till att bytet mellan scener sker med en animation. Scriptet bestämmer även vilken scen som ska bytas till beroende på vilket knapp användaren klickar på*/
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
+    private Animator anim;
+    // private SwapScene swapScene;
     public Button[] sceneOneButtons;
-    private float transitionDelayTime = 1.0f;
 
+    //private Animator animator;
+    public float transitionDelayTime = 0.1f;
+
+    //private GameObject gameObject;
+
+    // void Awake()
+    // {
+    //     swapScene = GameObject.FindObjectOfType<SwapScene>();
+    // }
+
+    //private void Awake()
+    //{
+        //animator = GetComponent<Animator>();
+    //}
 
     void Start()
     {
-        anim.SetTrigger("Out");
+        anim = GetComponent<Animator>();
+        
         foreach (Button btn in sceneOneButtons)
         {
             btn.onClick.AddListener(() => { LoadScene(getSceneName(btn.name)); });
         }
     }
 
-    public void LoadScene(string sceneName)
+    private void LoadScene(string sceneName)
     {
+
         if (sceneName != null)
         {
             StartCoroutine(DelayLoadLevel(sceneName));
+            //SwapScene.LoadScene(sceneName);
         }
     }
 
@@ -42,7 +58,7 @@ public class SceneController : MonoBehaviour
             case "Button_Back":
                 return "Menu";
             case "Button_Settings":
-                return "Profile";
+                return "StartMenu";
             default:
                 return null;
         }
@@ -50,9 +66,10 @@ public class SceneController : MonoBehaviour
 
     IEnumerator DelayLoadLevel(string sceneName)
     {
-        anim.SetTrigger("In");
+        Debug.Log("hhhhhhhhhhh");
+        //animator.SetTrigger("TriggerTransition");
         yield return new WaitForSeconds(transitionDelayTime);
         SwapScene.LoadScene(sceneName);
-
+        //SwapScene.LoadScene(nameOfScene);
     }
 }

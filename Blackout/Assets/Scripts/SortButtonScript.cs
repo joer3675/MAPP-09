@@ -11,16 +11,6 @@ public class SortButtonScript : MonoBehaviour
     private GameData gameData;
     private bool isNull;
     [SerializeField] private Text historyText;
-    [SerializeField] GameObject buttonPrefab;
-    [SerializeField] Transform menuPanel;
-    public GameObject panel;
-    private List<History> hList;
-    private List<History> currentHistoryList = new List<History>();
-    private List<GameObject> buttonPrefabList = new List<GameObject>();
-    private History currentHistory;
-    private int index;
-    private List<int> indexList = new List<int>();
-
     // private List<History> _history = new List<History>();
     // private List<Drinks> _drinks = new List<Drinks>();
     // private Dictionary<int, string> _beer = new Dictionary<int, string>();
@@ -30,27 +20,11 @@ public class SortButtonScript : MonoBehaviour
 
     void Start()
     {
-
         try
         {
             gameData = DataHandler.LoadGameData();
-            index = 0;
-            hList = gameData.History;
-            foreach (History h in hList)
-            {
-                GameObject button = (GameObject)Instantiate(buttonPrefab);
-                button.transform.SetParent(menuPanel.transform, false);
-                button.GetComponentInChildren<Text>().text = h.dateCreated;
-                buttonPrefabList.Add(button);
-                currentHistoryList.Add(h);
-                indexList.Add(index++);
-                button.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    Debug.Log("Pressed");
-                    showDateInformation(buttonPrefabList.IndexOf(button));
-                });
 
-            }
+
 
         }
         catch (Exception e)
@@ -67,48 +41,34 @@ public class SortButtonScript : MonoBehaviour
         else
         {
             isNull = false;
-            //displayOnScreen(gameData.History, "Date");
+            displayOnScreen(gameData.History);
         }
 
-    }
 
-    private void showDateInformation(int indexOfButton)
-    {
-        Debug.Log(indexOfButton);
-        foreach (int i in indexList)
-        {
-            if (i == indexOfButton)
-            {
 
-                currentHistory = currentHistoryList[indexList.IndexOf(i)];
-
-            }
-        }
-        displayOnInformationPanel();
-        panel.SetActive(true);
-        Debug.Log("here");
-    }
-    public void closePanel()
-    {
-        panel.SetActive(false);
     }
 
     public void sortButtonPressed()
     {
         if (!isNull)
         {
-            //List<History> hList = gameData.History;
+            List<History> hList = gameData.History;
             hList = QuickSortScript.QuickSort(hList, 0, hList.Count - 1, "double");
 
+            foreach (History h in hList)
+            {
+                Debug.Log(h.MaxPromille);
+                Debug.Log(h.dateCreated);
 
-            displayOnScreen(hList, "PerMille");
+            }
+            displayOnScreen(hList);
         }
     }
     public void sortButtonDate()
     {
         if (!isNull)
         {
-            //List<History> hList = gameData.History;
+            List<History> hList = gameData.History;
             List<Drinks> dList = new List<Drinks>();
             List<string> dateList = new List<string>();
             hList = QuickSortScript.QuickSort(hList, 0, hList.Count - 1, "date");
@@ -130,85 +90,37 @@ public class SortButtonScript : MonoBehaviour
                 // Debug.Log(h.dateCreated);
                 // Debug.Log(h.MaxPromille);
             }
-            displayOnScreen(hList, "Date");
+            displayOnScreen(hList);
         }
     }
 
 
-
-    private void displayOnScreen(List<History> list, string typOfSort)
+    private void displayOnScreen(List<History> list)
     {
-        int i = 0;
-        currentHistoryList.Clear();
         String tempText = "";
         foreach (History history in list)
         {
-
             foreach (Drinks drink in history._Drinks)
             {
-                // foreach (Drinks drink in currentHistory._Drinks)
-                // {
-
-                //     if (typOfSort.Equals("Date"))
-                //     {
-                //         buttonPrefabList[i++].GetComponentInChildren<Text>().text = currentHistory.dateCreated;
-                //     }
-                //     else
-                //     {
-                //         buttonPrefabList[i++].GetComponentInChildren<Text>().text = currentHistory.MaxPromille.ToString();
-                //     }
-
-
-                //     tempText += currentHistory.dateCreated + " and you had a max per mille at " + currentHistory.MaxPromille + " \n\n";
-                //     foreach (KeyValuePair<string, string> kvp in drink.drinks)
-                //     {
-                //         tempText += kvp.Key + "  " + kvp.Value + " \n\n";
-
-                //     }
-
-                // }
+                tempText += history.dateCreated + " and you had a max per mille at " + history.MaxPromille + " \n\n";
+                foreach (KeyValuePair<string, string> kvp in drink.drinks)
                 {
-
-                    if (typOfSort.Equals("Date"))
-                    {
-                        currentHistoryList.Add(history);
-                        buttonPrefabList[i++].GetComponentInChildren<Text>().text = history.dateCreated;
-                    }
-                    else
-                    {
-                        currentHistoryList.Add(history);
-                        buttonPrefabList[i++].GetComponentInChildren<Text>().text = history.MaxPromille.ToString() + " %";
-                    }
-
-
-                    tempText += history.dateCreated + " and you had a max per mille at " + history.MaxPromille + " \n\n";
-                    foreach (KeyValuePair<string, string> kvp in drink.drinks)
-                    {
-                        tempText += kvp.Key + "  " + kvp.Value + " \n\n";
-
-                    }
-
+                    tempText += kvp.Key + "  " + kvp.Value + " \n\n";
                 }
-
+                // foreach (string s in drink.wine.Values)
+                // {
+                //     tempText += "Wine " + s + " \n\n";
+                // }
+                // foreach (string s in drink.shot.Values)
+                // {
+                //     tempText += "Shot " + s + " \n\n";
+                // }
             }
-
-            //historyText.text = tempText;
-
+            // tempText += "Promille = " + history.MaxPromille + " at " + history.dateCreated + " \n\n";
         }
-    }
 
-    private void displayOnInformationPanel()
-    {
-        String tempText = "";
-        foreach (Drinks drink in currentHistory._Drinks)
-        {
-            tempText += currentHistory.dateCreated + " and you had a max per mille at " + currentHistory.MaxPromille + " \n\n";
-            foreach (KeyValuePair<string, string> kvp in drink.drinks)
-            {
-                tempText += kvp.Key + "  " + kvp.Value + " \n\n";
-
-            }
-        }
         historyText.text = tempText;
+        // hej
     }
 }
+
