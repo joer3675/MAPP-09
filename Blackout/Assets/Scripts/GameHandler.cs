@@ -165,7 +165,7 @@ public class GameHandler : MonoBehaviour
     {
         gameData.currentIndex++;
         DataHandler.SaveDataToFile(gameData);
-        PlayerPrefs.SetInt("hasStarted", 0); ;
+        PlayerPrefs.SetInt("hasStarted", 0);
         sceneController.LoadScene("Menu");
         Debug.Log("Game has ended");
     }
