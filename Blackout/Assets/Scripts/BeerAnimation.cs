@@ -8,10 +8,10 @@ public class BeerAnimation : MonoBehaviour
     [SerializeField] private Animator animator;
     private bool isPressed;
 
-    
+
     void Start()
     {
-        animator.GetComponent<Animator>();
+        //animator.GetComponent<Animator>();
     }
 
     private void Update()
@@ -22,21 +22,22 @@ public class BeerAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        
+
+
         //if (isPressed == true)
         //{
-            //animator.SetTrigger("Animate");
-       // }
-  
+        //animator.SetTrigger("Animate");
+        // }
+
 
     }
 
 
     public void ButtonPressed()
     {
-       GetComponent<Animation>().Play("NewBeerAnimation");
-    } 
+        animator.SetTrigger("Animate");
+        //GetComponent<Animation>().Play("NewBeerAnimation");
+    }
 
-    
+
 }
