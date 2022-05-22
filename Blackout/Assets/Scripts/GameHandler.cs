@@ -2,10 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System;
-using UnityEngine.SceneManagement;
+
 
 public class GameHandler : MonoBehaviour
 {
+    [SerializeField] private SceneController sceneController;
+    [SerializeField] private Canvas canvasQuestion;
+    [SerializeField] private Button buttonMessageYes;
+    [SerializeField] private Button buttonMessageNo;
     [SerializeField] private Text _textPromille;
     private UserData userData;
     private GameData gameData;
@@ -18,7 +22,7 @@ public class GameHandler : MonoBehaviour
     private DateTime startTime, currentTime;
     private string timeCreated;
     public Button[] sceneButtons;
-    //private int _history.previousTimeDiff = 0;
+
 
     void Awake()
     {
@@ -32,7 +36,7 @@ public class GameHandler : MonoBehaviour
 
         userData = DataHandler.LoadUserData();
         timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-        //// GameActiveScript.setBoolean(true);
+
         if (File.Exists(Application.persistentDataPath + "GameData.json"))
         {
             gameData = DataHandler.LoadGameData();
@@ -66,19 +70,16 @@ public class GameHandler : MonoBehaviour
 
         if (_history.promille > 0)
         {
-            //Debug.Log(_history.promille);
+
             double currentPerMille = getPerMille();
             showPromilleOnSceen(currentPerMille, (currentPerMille / 0.15));
             _history.promille = currentPerMille;
-            //showPromilleOnSceen(_history.promille, getTimeDiffrence());
+
         }
-        // gameData.age = userData.age;
-        // gameData.weight = userData.weight;
-        // gameData.sex = userData.sex;
+
         age = userData.age;
         weight = userData.weight;
         sex = userData.sex;
-
 
         foreach (Button btn in sceneButtons)
         {
@@ -86,57 +87,51 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    void showPromilleOnSceen(double promille, double untilSober)
+
+    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter*/
+    private void showPromilleOnSceen(double promille, double untilSober)
     {
         promille = Math.Round(promille, 2);
         untilSober = Math.Round(untilSober, 2);
-        Debug.Log(untilSober + " Time til sober");
-        Debug.Log(promille + " permille");
-        Debug.Log(Math.Round(((untilSober % 1) * 60), 2) + " Untill sober minutes");
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
-        clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));//(System.DateTime.Now.Hour + untilSober) % 24;
-        //Debug.Log(clockASober);
-        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + ". Expected to be sober " + clockASober.ToString("HH:mm"); // "day" + toString(dddd HH:mm)
+        clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
+        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
     }
 
-    private double getPerMille()
+    public double getPerMille()
     {
         double perMille = (_history.promille - 0.15 * getTimeDiffrence() / 60);
-        // Debug.Log(perMille + " permille");
         return perMille <= 0 ? 0 : perMille;
     }
+    public string getGender()
+    {
+        return sex;
+    }
 
+    /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
+    Sedan addera nya promillehalt från ny dryck. Sparar sedan ned all "gameData" till en Json fil som lagras på filvägen "Application.persistentDataPath".*/
     public void calcPromille(string nameButton)
     {
         PlayerPrefs.SetInt("hasStarted", 1);
         if (_history.promille < 0) _history.promille = 0;
-        /*Räknar ut promillehalt i blodet först genom att ta tidigare promille - 0.15 * antal timmar som passerat. 
-        Sedan addera nya promillehalt från ny dryck*/
+
         double gram = getGram(nameButton);
         _history.promille += (calc.CalculatePromille(sex, weight, gram));
 
         double max = System.Math.Max(previousPerMille, _history.promille);
         max = System.Math.Round(max, 2);
-        //double untilSober = System.Math.Ceiling(_history.promille / 0.15);
 
-        //_history.GameTime = getTimeDiffrence();
         double timeD = getTimeDiffrence();
         if (timeD > 0 && _history.promille > 0)
         {
             _history.promille -= (0.15 * timeD / 60); // (-0.15 promille/h), timeD = antal minuter sedan senaste drickan
 
         }
-        //double untilSober = System.Math.Ceiling(_history.promille / 0.15);
-        //double untilSober = System.Math.Round((_history.promille / 0.15), 2);
+
         double untilSober = _history.promille / 0.15;
-        Debug.Log(untilSober);
         previousPerMille = _history.promille;
-
-        // if (previousPerMille < 0) previousPerMille = 0;
-
         _history.MaxPromille = max;
-
         AddDrinks(nameButton);
 
         if (gameData.History.Count <= gameData.currentIndex)
@@ -156,36 +151,60 @@ public class GameHandler : MonoBehaviour
         showPromilleOnSceen(_history.promille, untilSober);
     }
 
+    /* När användaren väljer att klicka på "End-knappen". 
+    Kollar om det spelet är igång, ge användaren alternativ att avsluta eller inte */
     public void GameOver()
     {
         if (PlayerPrefs.GetInt("hasStarted") == 1)
         {
-            gameData.currentIndex++;
-            DataHandler.SaveDataToFile(gameData);
-            PlayerPrefs.SetInt("hasStarted", 0); ;
-            SceneManager.LoadScene("Menu");
+            displayEndCanvasQuestion();
         }
     }
 
+    private void EndGame()
+    {
+        gameData.currentIndex++;
+        DataHandler.SaveDataToFile(gameData);
+        PlayerPrefs.SetInt("hasStarted", 0); ;
+        sceneController.LoadScene("Menu");
+        Debug.Log("Game has ended");
+    }
+
+    private void displayEndCanvasQuestion()
+    {
+        canvasQuestion.gameObject.SetActive(true);
+
+        buttonMessageYes.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+            EndGame();
+        });
+        buttonMessageNo.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+        });
+    }
+
+    /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
 
-        /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
+
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
-        double timeDiff = localTimeDiffrence.Minutes;
-        // previousPerMille = _history.promille;
+
+        double timeDiff = localTimeDiffrence.TotalMinutes;
+
         if (timeDiff > _history.previousTimeDiff)
         {
             timeDiff -= _history.previousTimeDiff;
-            // _history.promille += -(0.15 * timeDiff / 60); // (timeDiff/60) för att få antal timmar
-            // if (_history.promille < 0) { _history.promille = 0; }
             _history.previousTimeDiff = timeDiff;
-
         }
+
         return timeDiff;
     }
 
+    /*Adderar en drink till en klass som håller data av drycker som sparas ned i JSON format*/
     private void AddDrinks(string name)
     {
         _drinks.numberOfDrinks++;
@@ -203,6 +222,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    /*Alkohol i gram från en öl,vin eller shot hämtad från Klassen CalController*/
     private double getGram(string name)
     {
         switch (name)
