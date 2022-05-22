@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 622674781}
   - component: {fileID: 622674784}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Game_Brain_Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,9 +636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cc3cc739970f34ea6032e623bdcc95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   sceneOneButtons:
   - {fileID: 1179019114}
-  transitionDelayTime: 0.8
 --- !u!4 &622674782
 Transform:
   m_ObjectHideFlags: 0
@@ -665,6 +665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c16e303803431843a49cfd08f866d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneController: {fileID: 0}
+  canvasQuestion: {fileID: 0}
+  buttonMessageYes: {fileID: 0}
+  buttonMessageNo: {fileID: 0}
   _textPromille: {fileID: 1481312097}
   sceneButtons:
   - {fileID: 626762094}
@@ -1209,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9040403615016835335, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2beb1efeeeedd4b439bee3960ce5deb2, type: 3}
@@ -2092,7 +2096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8485422028048084502, guid: 4268b8635d0b8004d97bf8f50288cd1b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8485422028048084502, guid: 4268b8635d0b8004d97bf8f50288cd1b, type: 3}
       propertyPath: m_AnchorMax.x
