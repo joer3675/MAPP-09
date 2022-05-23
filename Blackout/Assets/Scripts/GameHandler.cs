@@ -90,16 +90,18 @@ public class GameHandler : MonoBehaviour
     }
 
 
-    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter*/
+    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter. untilSober = hours in double (example 2.9 = 2 hrs and 0.9*60 minutes)*/
     private void showPromilleOnSceen(double promille, double untilSober)
     {
         var tomorrow = timeCreatedTimeFormat.AddDays(1);
         promille = Math.Round(promille, 2);
-        untilSober = Math.Round(untilSober, 2);
-        Debug.Log(promille);
+        //untilSober = Math.Round(untilSober, 2);
+
+
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
+
         if (tomorrow.Day == clockASober.Day)
         {
             _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
@@ -203,13 +205,13 @@ public class GameHandler : MonoBehaviour
         currentTime = System.DateTime.Now;
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
         double timeDiff = localTimeDiffrence.TotalMinutes;
-        //Debug.Log("TimeDiff: " + timeDiff + "  ::  history.priviousTimeDiff: " + _history.previousTimeDiff);
+
         if (timeDiff > _history.previousTimeDiff)
         {
             timeDiff -= _history.previousTimeDiff;
             _history.previousTimeDiff = timeDiff;
         }
-        Debug.Log("TimeDiff: " + timeDiff + "  ::  history.priviousTimeDiff: " + _history.previousTimeDiff);
+
         return timeDiff;
     }
 
