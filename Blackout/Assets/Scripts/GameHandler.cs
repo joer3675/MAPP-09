@@ -21,6 +21,7 @@ public class GameHandler : MonoBehaviour
     private string sex;
     private DateTime currentTime; // DateTime startTime removed 
     private string timeCreated;
+    private DateTime timeCreatedTimeFormat;
     public Button[] sceneButtons;
 
 
@@ -36,6 +37,7 @@ public class GameHandler : MonoBehaviour
 
         userData = DataHandler.LoadUserData();
         timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
+        timeCreatedTimeFormat = System.DateTime.Now.ToLocalTime();
 
         if (File.Exists(Application.persistentDataPath + "GameData.json"))
         {
@@ -91,13 +93,22 @@ public class GameHandler : MonoBehaviour
     /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter*/
     private void showPromilleOnSceen(double promille, double untilSober)
     {
+        var tomorrow = timeCreatedTimeFormat.AddDays(1);
         promille = Math.Round(promille, 2);
         untilSober = Math.Round(untilSober, 2);
         Debug.Log(promille);
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
-        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
+        if (tomorrow.Day == clockASober.Day)
+        {
+            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
+        }
+        else
+        {
+            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
+
+        }
     }
 
     public double getPerMille()
@@ -186,18 +197,19 @@ public class GameHandler : MonoBehaviour
         });
     }
 
-    /*Tid i minuter från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
+    /*Tid mellan senaste drinken och nuvarande drink*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
         double timeDiff = localTimeDiffrence.TotalMinutes;
-
+        //Debug.Log("TimeDiff: " + timeDiff + "  ::  history.priviousTimeDiff: " + _history.previousTimeDiff);
         if (timeDiff > _history.previousTimeDiff)
         {
             timeDiff -= _history.previousTimeDiff;
             _history.previousTimeDiff = timeDiff;
         }
+        Debug.Log("TimeDiff: " + timeDiff + "  ::  history.priviousTimeDiff: " + _history.previousTimeDiff);
         return timeDiff;
     }
 
