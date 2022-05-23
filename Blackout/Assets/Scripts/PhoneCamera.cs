@@ -13,6 +13,7 @@ public class PhoneCamera : MonoBehaviour
 
     public RawImage background;
     public AspectRatioFitter fit;
+    public int imageIdentifier = 0;
 
     private void Start()
     {
@@ -83,5 +84,6 @@ public class PhoneCamera : MonoBehaviour
         //Save it in a file.
         File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
         index++;
+        index = imageIdentifier; 
     }
 }
