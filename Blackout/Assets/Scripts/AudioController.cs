@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioController : MonoBehaviour
 {
     public GameObject audioOnIcon;
     public GameObject audioOffIcon;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +15,8 @@ public class AudioController : MonoBehaviour
         //vid start kollar metoden användarens info kring vad den klickat
         // om man mutad innan fortsätter den vara mutad, och tvärtom
         SetSoundState();
+
+        
     }
 
     // för att spara användarens info gällande om muteknappen är på eller av
@@ -49,5 +53,6 @@ public class AudioController : MonoBehaviour
             audioOffIcon.SetActive(true);
         }
     }
+
     
 }
