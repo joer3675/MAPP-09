@@ -1,12 +1,13 @@
-// using System.Collections;
-// using System.Collections.Generic;
+
+/*Detta script används för att tvinga användaren att skapa en profil första gången vid användning utav appen */
+
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 public class LoadingSceneScript : MonoBehaviour
 {
     private ReadUserInput userData;
-    // Start is called before the first frame update
+
     void Awake()
     {
         userData = gameObject.AddComponent<ReadUserInput>();
@@ -16,7 +17,7 @@ public class LoadingSceneScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("StartMenu");
+            SceneManager.LoadScene("Profile");
         }
 
     }
