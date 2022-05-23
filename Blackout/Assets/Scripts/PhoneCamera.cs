@@ -65,7 +65,6 @@ public class PhoneCamera : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SaveImage();
-            //backCam.Stop();
         }
     }
 
@@ -85,21 +84,4 @@ public class PhoneCamera : MonoBehaviour
         File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
         index++;
     }
-
-    //private Texture2D ManipulatePixels()
-    //{
-    //    Texture2D texture = new Texture2D(128, 128);
-    //    GetComponent<Renderer>().material.mainTexture = texture;
-
-    //    for (int y = 0; y < texture.height; y++)
-    //    {
-    //        for (int x = 0; x < texture.width; x++)
-    //        {
-    //            Color color = ((x & y) != 0 ? Color.white : Color.gray);
-    //            texture.SetPixel(x, y, color);
-    //        }
-    //    }
-    //    texture.Apply();
-    //    return texture;
-    //}
 }
