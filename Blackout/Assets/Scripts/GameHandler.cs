@@ -16,10 +16,10 @@ public class GameHandler : MonoBehaviour
     private History _history;
     private Drinks _drinks;
     private CalcController calc;
-    private double promille, previousPerMille;
+    private double previousPerMille; // double promille , removed
     private int age, weight;
     private string sex;
-    private DateTime startTime, currentTime;
+    private DateTime currentTime; // DateTime startTime removed 
     private string timeCreated;
     public Button[] sceneButtons;
 
@@ -55,7 +55,7 @@ public class GameHandler : MonoBehaviour
         if (_history == null && gameData.currentIndex == gameData.History.Count)
         {
             PlayerPrefs.SetInt("hasStarted", 0);
-            Debug.Log("New Game Started!");
+            Debug.Log("New Ready To Start!");
             _history = new History();
             _drinks = new Drinks();
             _history.timeLastDrink = System.DateTime.Now;
@@ -93,6 +93,7 @@ public class GameHandler : MonoBehaviour
     {
         promille = Math.Round(promille, 2);
         untilSober = Math.Round(untilSober, 2);
+        Debug.Log(promille);
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
@@ -185,14 +186,11 @@ public class GameHandler : MonoBehaviour
         });
     }
 
-    /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
+    /*Tid i minuter från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
-
-
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
-
         double timeDiff = localTimeDiffrence.TotalMinutes;
 
         if (timeDiff > _history.previousTimeDiff)
@@ -200,7 +198,6 @@ public class GameHandler : MonoBehaviour
             timeDiff -= _history.previousTimeDiff;
             _history.previousTimeDiff = timeDiff;
         }
-
         return timeDiff;
     }
 
