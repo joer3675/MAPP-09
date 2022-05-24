@@ -34,8 +34,7 @@ public class SceneController : MonoBehaviour
             case "Button_Scene_StartGame":
                 return "StartGame";
             case "Button_Scene_Timeline":
-                //har ändrat här också (från Timeline till TimelineMenu), skriver så att jag minns om det skulle bli fel någonstans!
-                return "TimelineMenu";
+                return "Timeline";
             case "Button_Scene_PromilleCalc":
                 return "PromilleCalc";
             case "Button_Save":
@@ -44,11 +43,6 @@ public class SceneController : MonoBehaviour
                 return "Menu";
             case "Button_Settings":
                 return "Profile";
-            //tanya: har lagt till lite här under för timeline-menyn jag gjort! :)
-            case "Button_Scene_Date":
-                return "DateTimeline";
-            case "Button_Scene_PerMille":
-                return "PerMilleTimeline";
             default:
                 return null;
         }
