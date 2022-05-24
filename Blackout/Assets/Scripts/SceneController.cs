@@ -49,6 +49,8 @@ public class SceneController : MonoBehaviour
                 return "HistoryTL";
             case "Button Timeline":
                 return "Timeline";
+            case "Button_Close":
+                return "TimelineMenu";
             default:
                 return null;
         }
