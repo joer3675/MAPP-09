@@ -46,7 +46,7 @@ public class SceneController : MonoBehaviour
                 return "Profile";
             //tanya: har lagt till här för min timeline meny
             case "Button Latest Night":
-                return "HistoryTL";
+                return "LatestNight";
             case "Button Timeline":
                 return "Timeline";
             case "Button_Close":
