@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PhoneCamera : MonoBehaviour
 {
     private bool camAvailable;
-    private WebCamTexture backCam = null;
+    private WebCamTexture frontCam = null;
     private Texture defaultBackground;
     private int index = 0;
     [SerializeField] private Animator animator;
@@ -29,20 +29,20 @@ public class PhoneCamera : MonoBehaviour
 
         for ( int i = 0; i < devices.Length; i++)
         {
-            if (!devices[i].isFrontFacing)
+            if (!devices[i].isBackFacing)
             {
-                backCam = new WebCamTexture(devices[i].name,Screen.width,Screen.height);
+                frontCam = new WebCamTexture(devices[i].name,Screen.width,Screen.height);
             }
         }
 
-        if (backCam == null)
+        if (frontCam == null)
         {
-            Debug.Log("Unable to find back camera");
+            Debug.Log("Unable to find front camera");
             return;
         }
 
-        backCam.Play();
-        background.texture = backCam;
+        frontCam.Play();
+        background.texture = frontCam;
 
         camAvailable = true;
     }
@@ -54,13 +54,13 @@ public class PhoneCamera : MonoBehaviour
             return;
         }
 
-        float ratio = (float)backCam.width / (float)backCam.height;
+        float ratio = (float)frontCam.width / (float)frontCam.height;
         fit.aspectRatio = ratio;
 
-        float scaleY = backCam.videoVerticallyMirrored ? -1f : 1f;
+        float scaleY = frontCam.videoVerticallyMirrored ? -1f : 1f;
         background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-        int orient = -backCam.videoRotationAngle;
+        int orient = -frontCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
 
@@ -72,7 +72,7 @@ public class PhoneCamera : MonoBehaviour
         Texture2D defaultBackground = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
 
         //Save the image to the Texture2D
-        defaultBackground.SetPixels(backCam.GetPixels());
+        defaultBackground.SetPixels(frontCam.GetPixels());
         defaultBackground.Apply();
 
         //Encode it as a PNG.
