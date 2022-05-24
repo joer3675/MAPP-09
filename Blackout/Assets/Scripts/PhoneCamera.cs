@@ -10,6 +10,7 @@ public class PhoneCamera : MonoBehaviour
     private WebCamTexture backCam = null;
     private Texture defaultBackground;
     private int index = 0;
+    [SerializeField] private Animator animator;
 
     public RawImage background;
     public AspectRatioFitter fit;
@@ -62,15 +63,12 @@ public class PhoneCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SaveImage();
-        }
     }
 
     public void SaveImage()
     {
+        animator.SetTrigger("TakePic");
+
         //Create a Texture2D with the size of the rendered image on the screen.
         Texture2D defaultBackground = new Texture2D(background.texture.width, background.texture.height, TextureFormat.ARGB32, false);
 

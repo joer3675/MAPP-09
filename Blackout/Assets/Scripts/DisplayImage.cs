@@ -7,15 +7,16 @@ using UnityEngine.UI;
  
 public class DisplayImage : MonoBehaviour
 {
+    private int index = 0;
     Texture2D thisTexture;
     byte[] bytes;
     string fileName;
     public GameObject[] ImageHolder = new GameObject[1];
  
     // Start is called before the first frame update
-    public void displayImage()
+    void Start()
     {
-        var imagesToLoad = Directory.GetFiles(Application.persistentDataPath + "/com.DefaultCompany.Blackout", "blackout_image.png"); //insert locatin of file storage
+        var imagesToLoad = Directory.GetFiles(Application.persistentDataPath + index + "blackout_image.png", "*.png"); //insert locatin of file storage
         for (int i = 0; i < imagesToLoad.Length; i++)
         {
             thisTexture = new Texture2D(100, 100);
