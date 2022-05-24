@@ -15,6 +15,8 @@ public class ReadUserInput : MonoBehaviour
     [SerializeField] private AudioSource soundGirlHello;
     [SerializeField] private AudioSource soundBoyHello;
     [SerializeField] private SceneController sceneController;
+    [SerializeField] private AudioSource saveSound;
+    [SerializeField] private AudioSource saveSoundFail;
 
     /*Detta script används då användaren ska skapa en "profil". Läser in all information som användaren väljer, samt sparar ned det till en Json fil.
     Spelar även lite ljud när användaren väljer att klicka på valet av kille eller tjej, samt visar vilket val som gjorts*/
@@ -36,6 +38,7 @@ public class ReadUserInput : MonoBehaviour
 
         if (hasInput())
         {
+            saveSound.Play();
             DataHandler.SaveUserDataToFile(_userData);
             // string dataUser = JsonUtility.ToJson(_userData, true);
             // System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
@@ -43,6 +46,11 @@ public class ReadUserInput : MonoBehaviour
             sceneController.LoadScene("Menu");
 
         }
+        else
+        {
+            saveSoundFail.Play();
+        }
+
     }
     public bool hasInput() { return _userData.age > 0 && _userData.weight > 0 && _userData.sex != null ? true : false; }
 
