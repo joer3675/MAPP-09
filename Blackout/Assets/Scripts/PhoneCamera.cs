@@ -61,11 +61,6 @@ public class PhoneCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SaveImage();
-        }
     }
 
     public void SaveImage()
@@ -83,5 +78,9 @@ public class PhoneCamera : MonoBehaviour
         //Save it in a file.
         File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
         index++;
+    }
+
+    public int getIndex(){
+        return index;
     }
 }
