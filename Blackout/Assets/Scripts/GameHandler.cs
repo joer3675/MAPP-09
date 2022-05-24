@@ -199,7 +199,7 @@ public class GameHandler : MonoBehaviour
         });
     }
 
-    /*Tid mellan senaste drinken och nuvarande drink*/
+    /*Tid mellan senaste drinken och nuvarande drink samt tar bort tidigare diff för att tiden räknas från när "spelet" startas*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
