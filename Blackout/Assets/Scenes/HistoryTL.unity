@@ -275,8 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2135850079}
   sceneOneButtons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 263585459}
 --- !u!4 &229782351
 Transform:
   m_ObjectHideFlags: 0
@@ -416,6 +415,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59bf852e64d2260448f76fe40684a71c, type: 3}
+--- !u!114 &263585459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1696331827042095519, guid: 59bf852e64d2260448f76fe40684a71c, type: 3}
+  m_PrefabInstance: {fileID: 263585458}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &916216927
 GameObject:
   m_ObjectHideFlags: 0
