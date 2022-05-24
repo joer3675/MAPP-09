@@ -84,6 +84,7 @@ public class SortButtonScript : MonoBehaviour
 
             }
         }
+        SwapScene.LoadScene("HistoryTl");
         displayOnInformationPanel();
         panel.SetActive(true);
         Debug.Log("here");
