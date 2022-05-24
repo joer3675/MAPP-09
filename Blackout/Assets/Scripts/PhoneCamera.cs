@@ -82,8 +82,4 @@ public class PhoneCamera : MonoBehaviour
         File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
         index++;
     }
-
-    public int getIndex(){
-        return index;
-    }
 }
