@@ -18,7 +18,7 @@ public class DisplayImage : MonoBehaviour
         var imagesToLoad = Directory.GetFiles(Application.persistentDataPath, "*.png"); //insert locatin of file storage
         for (int i = 0; i < imagesToLoad.Length; i++)
         {
-            thisTexture = new Texture2D(100, 100);
+            thisTexture = new Texture2D(500, 500);
             fileName = imagesToLoad[i];
             bytes = File.ReadAllBytes(fileName);
             thisTexture.LoadImage(bytes);
