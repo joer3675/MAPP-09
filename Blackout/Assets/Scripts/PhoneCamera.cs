@@ -80,7 +80,7 @@ public class PhoneCamera : MonoBehaviour
         byte[] bytes = defaultBackground.EncodeToPNG();
 
         //Save it in a file.
-        File.WriteAllBytes(Application.persistentDataPath + index + "blackout_image.png", bytes);
+        File.WriteAllBytes(Application.persistentDataPath + ".png", bytes);
         index++;
         index = imageIdentifier; 
     }
