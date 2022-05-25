@@ -1044,6 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7f435a3a658a24bbc2a6acffa81ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonEffectMale: {fileID: 1137753569}
+  buttonEffectFemale: {fileID: 886509231}
   boy: {fileID: 21300000, guid: ad0aa087ef73f6e4993beefb50d029e8, type: 3}
   boyPressed: {fileID: 21300000, guid: a1ae3affbcde13c4f98c9bf128db8364, type: 3}
   girl: {fileID: 21300000, guid: 2437555111f52de41a966b1f475a6ba2, type: 3}
@@ -1817,6 +1819,7 @@ GameObject:
   - component: {fileID: 886509228}
   - component: {fileID: 886509229}
   - component: {fileID: 886509230}
+  - component: {fileID: 886509231}
   m_Layer: 5
   m_Name: Button_Female
   m_TagString: Untagged
@@ -2041,6 +2044,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &886509231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886509224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cc950ff7266c6459e5f403ad31d44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffect: {fileID: 1000011128802252, guid: 38d422643007e3240b7022fd20b5751e, type: 3}
 --- !u!1 &950778094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2631,7 @@ GameObject:
   - component: {fileID: 1137753566}
   - component: {fileID: 1137753567}
   - component: {fileID: 1137753568}
+  - component: {fileID: 1137753569}
   m_Layer: 5
   m_Name: Button_Male
   m_TagString: Untagged
@@ -2839,6 +2856,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1137753569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137753562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cc950ff7266c6459e5f403ad31d44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
 --- !u!1 &1178806956
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,6 +9464,8 @@ GameObject:
   - component: {fileID: 2019262081}
   - component: {fileID: 2019262083}
   - component: {fileID: 2019262082}
+  - component: {fileID: 2019262085}
+  - component: {fileID: 2019262084}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -9502,6 +9534,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019262080}
   m_CullTransparentMesh: 1
+--- !u!114 &2019262084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019262080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &2019262085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019262080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.21176471}
+  m_EffectDistance: {x: 5, y: -9}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2053353378
 GameObject:
   m_ObjectHideFlags: 0
