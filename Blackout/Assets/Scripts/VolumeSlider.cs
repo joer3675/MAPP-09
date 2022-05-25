@@ -12,7 +12,7 @@ public class VolumeSlider : MonoBehaviour
         //om ingen data har sparats sätts värdet till 1/full volym
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
-            PlayerPrefs.SetFloat("musicVolume", 2);
+            PlayerPrefs.SetFloat("musicVolume", 1);
             Load();
         }
         else
