@@ -65,24 +65,27 @@ public class ReadUserInput : MonoBehaviour
         {
             if (b.name == "Button_Female")
             {
-                b.GetComponent<Image>().sprite = girl;
+                //b.GetComponent<Image>().sprite = girl;
+                b.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = girl;
             }
             else
             {
-
-                b.GetComponent<Image>().sprite = boy;
+                b.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = boy;
+                //b.GetComponentInParent<Image>().sprite = boy;
             }
         }
         if (btn.name == "Button_Male")
         {
             soundBoyHello.Play();
-            btn.GetComponent<Image>().sprite = boyPressed;
+            //btn.GetComponent<Image>().sprite = boyPressed;
+            btn.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = boyPressed;
             _userData.sex = "Male";
         }
         else
         {
             soundGirlHello.Play();
-            btn.GetComponent<Image>().sprite = girlPressed;
+            btn.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = girlPressed;
+            // btn.GetComponent<Image>().sprite = girlPressed;
             _userData.sex = "Female";
         }
     }
