@@ -118,6 +118,7 @@ public class GameHandler : MonoBehaviour
         double min = ((untilSober % 1) * 60);
         double seconds = (min % 1) * 60;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + (int)min).AddSeconds(clockASober.Second + (int)seconds);
+        Debug.Log("CloASober " + clockASober);
         if (tomorrow.Day == clockASober.Day)
         {
             _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
@@ -175,8 +176,9 @@ public class GameHandler : MonoBehaviour
             _history._Drinks[0] = _drinks;
         }
 
-        _history.dateCreated = timeCreated;
-        _history.timeLastDrink = System.DateTime.Now.AddSeconds(-DateTime.Now.Second);   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
+        //_history.dateCreated = timeCreated;
+        //_history.timeLastDrink = System.DateTime.Now.AddSeconds(-DateTime.Now.Second);   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
+        _history.timeLastDrink = System.DateTime.Now;   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
         DataHandler.SaveDataToFile(gameData);
         showPromilleOnSceen(_history.promille); //, untilSober
     }
