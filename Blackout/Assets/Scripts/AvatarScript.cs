@@ -20,7 +20,6 @@ public class AvatarScript : MonoBehaviour
 
     void Start()
     {
-
         gender = gameHandler.getGender();
         if (gender.Equals("Male"))
         {
@@ -51,6 +50,7 @@ public class AvatarScript : MonoBehaviour
 
         double perMille = gameHandler.getPerMille();
         perMille = System.Math.Round(perMille, 2);
+
 
         // Updatera avatar beroende på vad promillehalten är
         Sprite currentSprite = getCorrectSpritePerMilleAndGender(perMille);
@@ -92,7 +92,7 @@ public class AvatarScript : MonoBehaviour
                         return boy1;
                         // Gör något
                     }
-                    else if (perMille > 0)
+                    else if (perMille >= 0)
                     {
                         return boy1;
                         // Bild...
