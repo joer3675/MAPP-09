@@ -10,7 +10,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private Canvas canvasQuestion;
     [SerializeField] private Button buttonMessageYes;
     [SerializeField] private Button buttonMessageNo;
-    [SerializeField] private Text _textPromille;
+    [SerializeField] private Text textOnScreen;
     private UserData userData;
     private GameData gameData;
     private History _history;
@@ -110,22 +110,25 @@ public class GameHandler : MonoBehaviour
     /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter. */
     private void showPromilleOnSceen(double promille) //, double untilSober
     {
-
         DateTime tomorrow = DateTime.ParseExact(timeCreated, "dd-MM-yyyy HH:mm", null).AddDays(1);
         double untilSober = promille / 0.15;
-        _textPromille.gameObject.SetActive(true);
+        textOnScreen.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
         double min = ((untilSober % 1) * 60);
         double seconds = (min % 1) * 60;
         clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + (int)min).AddSeconds(clockASober.Second + (int)seconds);
-        Debug.Log("CloASober " + clockASober);
-        if (tomorrow.Day == clockASober.Day)
+
+        if (promille <= 0)
         {
-            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
+            textOnScreen.text = "Your Per Mille is 0%\n" + "End night or add a Drink to your current";
+        }
+        else if (tomorrow.Day == clockASober.Day)
+        {
+            textOnScreen.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
         }
         else
         {
-            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");
+            textOnScreen.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");
 
         }
     }
