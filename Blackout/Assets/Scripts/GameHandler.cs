@@ -94,6 +94,16 @@ public class GameHandler : MonoBehaviour
         {
             btn.onClick.AddListener(() => calcPromille(btn.name));
         }
+        buttonMessageYes.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+            EndGame();
+        });
+        buttonMessageNo.onClick.AddListener(() =>
+        {
+            canvasQuestion.gameObject.SetActive(false);
+        });
+
     }
 
 
@@ -193,17 +203,8 @@ public class GameHandler : MonoBehaviour
     private void displayEndCanvasQuestion()
     {
         canvasQuestion.gameObject.SetActive(true);
-
-        buttonMessageYes.onClick.AddListener(() =>
-        {
-            canvasQuestion.gameObject.SetActive(false);
-            EndGame();
-        });
-        buttonMessageNo.onClick.AddListener(() =>
-        {
-            canvasQuestion.gameObject.SetActive(false);
-        });
     }
+
 
     /*Tid mellan senaste drinken och nuvarande drink samt tar bort tidigare diff för att tiden räknas från när "spelet" startas*/
     private double getTimeDiffrence()
