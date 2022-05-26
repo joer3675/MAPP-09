@@ -43,8 +43,6 @@ public class SceneController : MonoBehaviour
                 return "Menu";
             case "Button_Settings":
                 return "Profile";
-            case "Button_Camera":
-                return "Camera";    
             default:
                 return null;
         }
