@@ -16,12 +16,11 @@ public class GameHandler : MonoBehaviour
     private History _history;
     private Drinks _drinks;
     private CalcController calc;
-    private double previousPerMille; // double promille , removed
+    private double promille, previousPerMille;
     private int age, weight;
     private string sex;
-    private DateTime currentTime; // DateTime startTime removed 
+    private DateTime startTime, currentTime;
     private string timeCreated;
-    private DateTime timeCreatedTimeFormat;
     public Button[] sceneButtons;
 
 
@@ -36,8 +35,7 @@ public class GameHandler : MonoBehaviour
     {
 
         userData = DataHandler.LoadUserData();
-        // timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-        // timeCreatedTimeFormat = System.DateTime.Now.ToLocalTime();
+        timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
 
         if (File.Exists(Application.persistentDataPath + "GameData.json"))
         {
@@ -52,20 +50,15 @@ public class GameHandler : MonoBehaviour
         {
             Debug.Log("gameData null, new gameData created");
             gameData = new GameData();
-            timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-            timeCreatedTimeFormat = System.DateTime.Now.ToLocalTime();
         }
 
         if (_history == null && gameData.currentIndex == gameData.History.Count)
         {
             PlayerPrefs.SetInt("hasStarted", 0);
-            Debug.Log("New Ready To Start!");
+            Debug.Log("New Game Started!");
             _history = new History();
             _drinks = new Drinks();
             _history.timeLastDrink = System.DateTime.Now;
-            timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-            _history.dateCreated = timeCreated;
-            //timeCreatedTimeFormat = DateTime.Parse(timeCreated);
         }
         else
         {
@@ -73,15 +66,13 @@ public class GameHandler : MonoBehaviour
             Debug.Log("Ongoing Session Loaded");
             _history = gameData.History[gameData.History.Count - 1];
             _drinks = gameData.History[gameData.History.Count - 1]._Drinks[0];
-            timeCreated = _history.dateCreated;
         }
 
         if (_history.promille > 0)
         {
 
             double currentPerMille = getPerMille();
-            //Debug.Log(currentPerMille);
-            showPromilleOnSceen(currentPerMille); //, (currentPerMille / 0.15))
+            showPromilleOnSceen(currentPerMille, (currentPerMille / 0.15));
             _history.promille = currentPerMille;
 
         }
@@ -97,26 +88,15 @@ public class GameHandler : MonoBehaviour
     }
 
 
-    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter. */
-    private void showPromilleOnSceen(double promille) //, double untilSober
+    /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter*/
+    private void showPromilleOnSceen(double promille, double untilSober)
     {
-
-        DateTime tomorrow = DateTime.ParseExact(timeCreated, "dd-MM-yyyy HH:mm", null).AddDays(1);
-        double untilSober = promille / 0.15;
+        promille = Math.Round(promille, 2);
+        untilSober = Math.Round(untilSober, 2);
         _textPromille.gameObject.SetActive(true);
         System.DateTime clockASober = System.DateTime.Now;
-        double min = ((untilSober % 1) * 60);
-        double seconds = (min % 1) * 60;
-        clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + (int)min).AddSeconds(clockASober.Second + (int)seconds);
-        if (tomorrow.Day == clockASober.Day)
-        {
-            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober tomorrow " + clockASober.ToString("HH:mm");
-        }
-        else
-        {
-            _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");
-
-        }
+        clockASober = clockASober.Date.AddHours(clockASober.Hour + (int)untilSober).AddMinutes(clockASober.Minute + ((untilSober % 1) * 60));   //(System.DateTime.Now.Hour + untilSober) % 24;
+        _textPromille.text = "Your Per Mille is about " + System.Math.Round(promille, 2) + " %. Expected to be sober " + clockASober.ToString("HH:mm");   // "day" + toString(dddd HH:mm)
     }
 
     public double getPerMille()
@@ -145,7 +125,7 @@ public class GameHandler : MonoBehaviour
         double timeD = getTimeDiffrence();
         if (timeD > 0 && _history.promille > 0)
         {
-            _history.promille -= (0.15 * timeD / 60); // (-0.15 promille/h), timeD = antal minuter sedan senaste drickan / 60 för timmar
+            _history.promille -= (0.15 * timeD / 60); // (-0.15 promille/h), timeD = antal minuter sedan senaste drickan
 
         }
 
@@ -168,7 +148,7 @@ public class GameHandler : MonoBehaviour
         _history.dateCreated = timeCreated;
         _history.timeLastDrink = System.DateTime.Now.AddSeconds(-DateTime.Now.Second);   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
         DataHandler.SaveDataToFile(gameData);
-        showPromilleOnSceen(_history.promille); //, untilSober
+        showPromilleOnSceen(_history.promille, untilSober);
     }
 
     /* När användaren väljer att klicka på "End-knappen". 
@@ -185,7 +165,7 @@ public class GameHandler : MonoBehaviour
     {
         gameData.currentIndex++;
         DataHandler.SaveDataToFile(gameData);
-        PlayerPrefs.SetInt("hasStarted", 0);
+        PlayerPrefs.SetInt("hasStarted", 0); ;
         sceneController.LoadScene("Menu");
         Debug.Log("Game has ended");
     }
@@ -205,20 +185,21 @@ public class GameHandler : MonoBehaviour
         });
     }
 
-    /*Tid mellan senaste drinken och nuvarande drink samt tar bort tidigare diff för att tiden räknas från när "spelet" startas*/
+    /*Tid från att spelet startar till att en ny dryck adderas, detta för att beräkna previousPerMille*/
     private double getTimeDiffrence()
     {
         currentTime = System.DateTime.Now;
+
+
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
+
         double timeDiff = localTimeDiffrence.TotalMinutes;
-        // if (timeDiff.CompareTo(_history.previousTimeDiff) > 0)
-        // //if (timeDiff > _history.previousTimeDiff)
-        // {
-        //     Debug.Log(timeDiff);
-        //     timeDiff -= _history.previousTimeDiff;
-        //     _history.previousTimeDiff = timeDiff;
-        // }
-        //_history.previousTimeDiff = timeDiff;
+
+        if (timeDiff > _history.previousTimeDiff)
+        {
+            timeDiff -= _history.previousTimeDiff;
+            _history.previousTimeDiff = timeDiff;
+        }
 
         return timeDiff;
     }

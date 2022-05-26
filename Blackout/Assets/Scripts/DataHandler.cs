@@ -19,20 +19,6 @@ public static class DataHandler
         }
     }
 
-    public static void SaveUserDataToFile(UserData userData)
-    {
-        try
-        {
-            var dataUser2 = JsonConvert.SerializeObject(userData, Formatting.Indented);
-            System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser2);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Data failed to save!" + e);
-            throw;
-        }
-    }
-
     public static UserData LoadUserData()
     {
         try
