@@ -5,6 +5,7 @@ public class ReadUserInput : MonoBehaviour
     private UserData _userData = new UserData();
     public ButtonParticleEffect buttonEffectMale;
     public ButtonParticleEffect buttonEffectFemale;
+    [SerializeField] private Button buttonSave;
     [SerializeField] private Sprite boy;
     [SerializeField] private Sprite boyPressed;
     [SerializeField] private Sprite girl;
@@ -25,7 +26,11 @@ public class ReadUserInput : MonoBehaviour
 
     void Start()
     {
-
+        if (!hasInput())
+        {
+            buttonSave.GetComponent<Image>().color = new Color32(128, 128, 128, 255);
+            buttonSave.GetComponentInChildren<Text>().color = new Color32(211, 211, 211, 255);
+        }
         slidebarAgeText.text = sliderAge.value.ToString();
         slidebarWeightText.text = sliderWeight.value.ToString();
         foreach (Button button in buttonSex)
@@ -88,6 +93,8 @@ public class ReadUserInput : MonoBehaviour
             // btn.GetComponent<Image>().sprite = girlPressed;
             _userData.sex = "Female";
         }
+        buttonSave.GetComponent<Image>().color = new Color32(0, 171, 102, 255);
+        buttonSave.GetComponentInChildren<Text>().color = Color.white;
     }
 
     public void OnSildeBarTextChange()

@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonEffectMale: {fileID: 1137753569}
   buttonEffectFemale: {fileID: 886509231}
+  buttonSave: {fileID: 1572190189}
   boy: {fileID: 21300000, guid: b5601c6d26a12264f84cecfa6139eaf3, type: 3}
   boyPressed: {fileID: 21300000, guid: 663480de2e9382f4fbd843a51dcf770f, type: 3}
   girl: {fileID: 21300000, guid: b5601c6d26a12264f84cecfa6139eaf3, type: 3}
@@ -8879,8 +8880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 200, y: 150}
+  m_AnchoredPosition: {x: 0, y: 112.14801}
+  m_SizeDelta: {x: 400, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1572190189
 MonoBehaviour:
@@ -8901,20 +8902,20 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.13751912, g: 1, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.40177587, g: 1, b: 0.3066038, a: 1}
-    m_PressedColor: {r: 0.097114354, g: 0.7075472, b: 0, a: 1}
-    m_SelectedColor: {r: 0.13725491, g: 1, b: 0, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 0494b73b8f6883a4e8e71b0a0ce2affc, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -8958,7 +8959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f1893fee7fc9ae47a1f1fe2890a5e0f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b01ce69efc495224faa24c434d0f6eba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8983,7 +8984,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572190187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
@@ -9352,7 +9353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1698990219
 Transform:
   m_ObjectHideFlags: 0
@@ -9761,7 +9762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019262080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
