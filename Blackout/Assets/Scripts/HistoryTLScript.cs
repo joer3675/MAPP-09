@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class HistoryTLScript : MonoBehaviour
+public static class HistoryTLScript
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private static History CURRENT_HISTORY;
+    public static void setCurrentHistory(History historyObject)
     {
-        
+        CURRENT_HISTORY = historyObject;
+    }
+    public static History getCurrentHistory()
+    {
+        return CURRENT_HISTORY;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

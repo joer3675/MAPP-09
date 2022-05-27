@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Camera.unity
     guid: 9ceda95470e414948971b4f4faf36019
+  - enabled: 1
+    path: Assets/Scenes/HistoryTL.unity
+    guid: d5b97030dc33c4f7caac09c9c3116460
   m_configObjects: {}

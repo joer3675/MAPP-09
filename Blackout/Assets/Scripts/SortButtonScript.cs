@@ -81,9 +81,10 @@ public class SortButtonScript : MonoBehaviour
             {
 
                 currentHistory = currentHistoryList[indexList.IndexOf(i)];
-
+                HistoryTLScript.setCurrentHistory(currentHistory);
             }
         }
+        SwapScene.LoadScene("HistoryTL");
         displayOnInformationPanel();
         panel.SetActive(true);
         Debug.Log("here");
