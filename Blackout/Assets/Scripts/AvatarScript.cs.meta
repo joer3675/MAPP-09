@@ -3,7 +3,14 @@ guid: cc9025dc84bb8544e998d759018fed54
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameHandler: {instanceID: 0}
+  - boy1: {fileID: 21300000, guid: 62e0311a0cbc24ccba2e8617c9a744af, type: 3}
+  - boy2: {fileID: 21300000, guid: 298934e0ec0984324aba16a69f111440, type: 3}
+  - boy3: {fileID: 21300000, guid: bf1cae29de9d24c659e69d7e5812c774, type: 3}
+  - girl1: {instanceID: 0}
+  - girl2: {instanceID: 0}
+  - girl3: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

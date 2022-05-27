@@ -17,17 +17,16 @@ public class LatestNight : MonoBehaviour
         List<History> historyList = gameData.History;
         //hämtar sista objektet i listan
         lastHistory = historyList[historyList.Count - 1];
+        //loggar senaste kvällens promille
         Debug.Log(lastHistory.MaxPromille);
 
         string tempText = "";
 
+        //en foreach loop som skriver ut datum på den senaste kvällen, vad/vilken typ av drink man druckit samt vilken tid den togs + vad promillehalten var
         foreach (Drinks drink in lastHistory._Drinks)
         {
 
             
-
-
-
             tempText += lastHistory.dateCreated + " and you had a max per mille at " + lastHistory.MaxPromille + " \n\n";
             foreach (KeyValuePair<string, string> kvp in drink.drinks)
             {
