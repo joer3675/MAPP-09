@@ -45,6 +45,7 @@ public class ReadUserInput : MonoBehaviour
 
         if (hasInput())
         {
+            buttonSave.GetComponent<Animator>().SetTrigger("Click");
             buttonEffectMale.playEffect();
             buttonEffectFemale.playEffect();
             saveSound.Play();

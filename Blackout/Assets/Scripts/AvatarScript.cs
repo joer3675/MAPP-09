@@ -7,11 +7,11 @@ public class AvatarScript : MonoBehaviour
     [SerializeField] private Sprite boy1;
     [SerializeField] private Sprite boy2;
     [SerializeField] private Sprite boy3;
-    [SerializeField] private Sprite boy4;
+    //[SerializeField] private Sprite boy4;
     [SerializeField] private Sprite girl1;
     [SerializeField] private Sprite girl2;
     [SerializeField] private Sprite girl3;
-    [SerializeField] private Sprite girl4;
+    //[SerializeField] private Sprite girl4;
     private float currentTime;
     private float timeDelay = 2.0f;
     private float timer = 0.0f;
@@ -72,27 +72,27 @@ public class AvatarScript : MonoBehaviour
         {
             case "Male":
                 {
-                    if (perMille > 4)
-                    {
-                        return boy4;
-
-                    }
-                    else if (perMille > 3)
+                    if (perMille > 1)
                     {
                         return boy3;
-                        //Gör något
+
                     }
-                    else if (perMille > 2)
+                    // else if (perMille > 1.5)
+                    // {
+                    //     return boy3;
+                    //     //Gör något
+                    // }
+                    // else if (perMille > 1)
+                    // {
+                    //     return boy3;
+                    //     // Gör något
+                    // }
+                    else if (perMille > 0)
                     {
                         return boy2;
                         // Gör något
                     }
-                    else if (perMille > 1)
-                    {
-                        return boy1;
-                        // Gör något
-                    }
-                    else if (perMille >= 0)
+                    else if (perMille <= 0)
                     {
                         return boy1;
                         // Bild...
@@ -105,27 +105,27 @@ public class AvatarScript : MonoBehaviour
 
             case "Female":
                 {
-                    if (perMille > 4)
-                    {
-                        return girl4;
-
-                    }
-                    else if (perMille > 3)
+                    if (perMille > 1)
                     {
                         return girl3;
-                        //Gör något
+
                     }
-                    else if (perMille > 2)
+                    // else if (perMille > 3)
+                    // {
+                    //     return girl3;
+                    //     //Gör något
+                    // }
+                    // else if (perMille > 2)
+                    // {
+                    //     return girl2;
+                    //     // Gör något
+                    // }
+                    else if (perMille > 0)
                     {
                         return girl2;
                         // Gör något
                     }
-                    else if (perMille > 1)
-                    {
-                        return girl1;
-                        // Gör något
-                    }
-                    else if (perMille > 0)
+                    else if (perMille <= 0)
                     {
                         return girl1;
                         // Bild...

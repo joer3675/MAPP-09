@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 119808805}
   - component: {fileID: 119808803}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: Slidbar Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

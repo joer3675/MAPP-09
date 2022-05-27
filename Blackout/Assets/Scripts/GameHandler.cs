@@ -36,8 +36,6 @@ public class GameHandler : MonoBehaviour
     {
 
         userData = DataHandler.LoadUserData();
-        // timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-        // timeCreatedTimeFormat = System.DateTime.Now.ToLocalTime();
 
         if (File.Exists(Application.persistentDataPath + "GameData.json"))
         {
@@ -94,6 +92,7 @@ public class GameHandler : MonoBehaviour
         {
             btn.onClick.AddListener(() => calcPromille(btn.name));
         }
+
         buttonMessageYes.onClick.AddListener(() =>
         {
             canvasQuestion.gameObject.SetActive(false);
