@@ -44,7 +44,9 @@ public class SceneController : MonoBehaviour
             case "Button_Settings":
                 return "Profile";
             case "Button_Camera":
-                return "Camera";    
+                return "Camera";
+            case "Button_Close":
+                return "Timeline";
             default:
                 return null;
         }
