@@ -1343,7 +1343,7 @@ MonoBehaviour:
   canvasQuestion: {fileID: 1259697647}
   buttonMessageYes: {fileID: 424723081}
   buttonMessageNo: {fileID: 424754705}
-  _textPromille: {fileID: 1481312097}
+  textOnScreen: {fileID: 1481312097}
   sceneButtons:
   - {fileID: 626762094}
   - {fileID: 1147666213}
@@ -2441,7 +2441,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Promillehalten visas har som text '
+  m_Text: Text to show soberness
 --- !u!222 &1481312098
 CanvasRenderer:
   m_ObjectHideFlags: 0
