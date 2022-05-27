@@ -85,9 +85,9 @@ public class SortButtonScript : MonoBehaviour
             }
         }
         SwapScene.LoadScene("HistoryTL");
-        displayOnInformationPanel();
-        panel.SetActive(true);
-        Debug.Log("here");
+        // displayOnInformationPanel();
+        // panel.SetActive(true);
+        // Debug.Log("here");
     }
     public void closePanel()
     {
@@ -198,18 +198,18 @@ public class SortButtonScript : MonoBehaviour
         }
     }
 
-    private void displayOnInformationPanel()
-    {
-        String tempText = "";
-        foreach (Drinks drink in currentHistory._Drinks)
-        {
-            tempText += currentHistory.dateCreated + " and you had a max per mille at " + currentHistory.MaxPromille + " \n\n";
-            foreach (KeyValuePair<string, string> kvp in drink.drinks)
-            {
-                tempText += kvp.Key + "  " + kvp.Value + " \n\n";
+    // private void displayOnInformationPanel()
+    // {
+    //     String tempText = "";
+    //     foreach (Drinks drink in currentHistory._Drinks)
+    //     {
+    //         tempText += currentHistory.dateCreated + " and you had a max per mille at " + currentHistory.MaxPromille + " \n\n";
+    //         foreach (KeyValuePair<string, string> kvp in drink.drinks)
+    //         {
+    //             tempText += kvp.Key + "  " + kvp.Value + " \n\n";
 
-            }
-        }
-        historyText.text = tempText;
-    }
+    //         }
+    //     }
+    //     historyText.text = tempText;
+    // }
 }
