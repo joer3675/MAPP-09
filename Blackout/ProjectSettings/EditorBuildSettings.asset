@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HistoryTL.unity
     guid: d5b97030dc33c4f7caac09c9c3116460
+  - enabled: 1
+    path: Assets/Scenes/LatestNight.unity
+    guid: 48ab1eb8d0aed4edba1802f183530958
+  - enabled: 1
+    path: Assets/Scenes/TimelineMenu.unity
+    guid: 0f3437c1a0ed34e2587fa72c9fec0693
   m_configObjects: {}

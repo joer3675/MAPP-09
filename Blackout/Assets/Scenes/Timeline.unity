@@ -3603,7 +3603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1696331827042095517, guid: 59bf852e64d2260448f76fe40684a71c, type: 3}
       propertyPath: m_Name
-      value: Button_Back
+      value: Button_Close
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59bf852e64d2260448f76fe40684a71c, type: 3}
