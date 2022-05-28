@@ -8,7 +8,15 @@ public class PitchSlidebar : MonoBehaviour
 
     public void SetPitchLevel(float sliderValue)
     {
-        mixer.SetFloat("MusicPitch", sliderValue / 100);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            audioSource.pitch = sliderValue / 100;
+        }
+        else
+        {
+            mixer.SetFloat("MusicPitch", sliderValue / 100);
+        }
+
     }
     public void playAudio()
     {
