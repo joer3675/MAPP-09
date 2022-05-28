@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PromilleCalc.unity
     guid: ecdcba9e1cd0b461c9cb45ef39a74919
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SceneActive.unity
     guid: fe95be203c50e734a950848ab1cf2b3c
   - enabled: 1
