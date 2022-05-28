@@ -96,6 +96,7 @@ public class ReadUserInput : MonoBehaviour
         }
         buttonSave.GetComponent<Image>().color = new Color32(0, 171, 102, 255);
         buttonSave.GetComponentInChildren<Text>().color = Color.white;
+        buttonSave.GetComponentInChildren<Outline>().enabled = true;
     }
 
     public void OnSildeBarTextChange()
