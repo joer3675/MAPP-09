@@ -1,7 +1,8 @@
-// using System.Collections;
-// using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class CalcController : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class CalcController : MonoBehaviour
     {
         double currentPromillehalt = 0;
 
-        if (_sex == "Kvinna")
+        if (_sex == "Female")
         {
             currentPromillehalt = gram / (weight * 0.62) - (0.15 * time); //alkoholförbränning.se vart 0.62 och 0.71 kommer från
         }
@@ -93,6 +94,10 @@ public class CalcController : MonoBehaviour
 
     private void displayPromille(double promille)
     {
+        if (promille.CompareTo(0) <= 0)
+        {
+            promille = 0;
+        }
         result.text = "" + int_weight;
         result.gameObject.SetActive(true);
         result.text = "Your Per Mille is about " + System.Math.Round(promille, 2);
