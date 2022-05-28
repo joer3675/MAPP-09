@@ -2655,12 +2655,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameHandler: {fileID: 622674783}
-  boy1: {fileID: 21300000, guid: 1975232a757404a3aae437fcac3afd9c, type: 3}
-  boy2: {fileID: 21300000, guid: 228c6c0163fbe4bc191bfa616cd567f5, type: 3}
-  boy3: {fileID: 21300000, guid: 38a3b14a0f3554fd6a0c8f475c7640ed, type: 3}
-  girl1: {fileID: 21300000, guid: 2437555111f52de41a966b1f475a6ba2, type: 3}
-  girl2: {fileID: 21300000, guid: 2437555111f52de41a966b1f475a6ba2, type: 3}
-  girl3: {fileID: 21300000, guid: 2437555111f52de41a966b1f475a6ba2, type: 3}
+  boy1: {fileID: 21300000, guid: 62e0311a0cbc24ccba2e8617c9a744af, type: 3}
+  boy2: {fileID: 21300000, guid: 298934e0ec0984324aba16a69f111440, type: 3}
+  boy3: {fileID: 21300000, guid: bf1cae29de9d24c659e69d7e5812c774, type: 3}
+  girl1: {fileID: 21300000, guid: 1975232a757404a3aae437fcac3afd9c, type: 3}
+  girl2: {fileID: 21300000, guid: 228c6c0163fbe4bc191bfa616cd567f5, type: 3}
+  girl3: {fileID: 21300000, guid: 38a3b14a0f3554fd6a0c8f475c7640ed, type: 3}
 --- !u!114 &1734564563
 MonoBehaviour:
   m_ObjectHideFlags: 0

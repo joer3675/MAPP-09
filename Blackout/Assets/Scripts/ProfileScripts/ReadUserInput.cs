@@ -50,9 +50,6 @@ public class ReadUserInput : MonoBehaviour
             buttonEffectFemale.playEffect();
             saveSound.Play();
             DataHandler.SaveUserDataToFile(_userData);
-            // string dataUser = JsonUtility.ToJson(_userData, true);
-            // System.IO.File.WriteAllText(Application.persistentDataPath + "UserData.json", dataUser);
-
             sceneController.LoadScene("Menu");
 
         }
@@ -71,19 +68,16 @@ public class ReadUserInput : MonoBehaviour
         {
             if (b.name == "Button_Female")
             {
-                //b.GetComponent<Image>().sprite = girl;
                 b.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = girl;
             }
             else
             {
                 b.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = boy;
-                //b.GetComponentInParent<Image>().sprite = boy;
             }
         }
         if (btn.name == "Button_Male")
         {
             soundBoyHello.Play();
-            //btn.GetComponent<Image>().sprite = boyPressed;
             btn.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = boyPressed;
             _userData.sex = "Male";
         }
@@ -91,7 +85,6 @@ public class ReadUserInput : MonoBehaviour
         {
             soundGirlHello.Play();
             btn.transform.parent.GetChild(0).gameObject.GetComponent<Image>().sprite = girlPressed;
-            // btn.GetComponent<Image>().sprite = girlPressed;
             _userData.sex = "Female";
         }
         buttonSave.GetComponent<Image>().color = new Color32(0, 171, 102, 255);

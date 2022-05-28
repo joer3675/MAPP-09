@@ -63,7 +63,7 @@ public class GameHandler : MonoBehaviour
             _history.timeLastDrink = System.DateTime.Now;
             timeCreated = System.DateTime.Now.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
             _history.dateCreated = timeCreated;
-            //timeCreatedTimeFormat = DateTime.Parse(timeCreated);
+
         }
         else
         {
@@ -76,12 +76,9 @@ public class GameHandler : MonoBehaviour
 
         if (_history.promille > 0)
         {
-
             double currentPerMille = getPerMille();
-            //Debug.Log(currentPerMille);
             showPromilleOnSceen(currentPerMille); //, (currentPerMille / 0.15))
             _history.promille = currentPerMille;
-
         }
 
         age = userData.age;
@@ -178,8 +175,6 @@ public class GameHandler : MonoBehaviour
             _history._Drinks[0] = _drinks;
         }
 
-        //_history.dateCreated = timeCreated;
-        //_history.timeLastDrink = System.DateTime.Now.AddSeconds(-DateTime.Now.Second);   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
         _history.timeLastDrink = System.DateTime.Now;   // Minus sekunder för att bara spara timmar och minuter. Sekunder blir altid satt till 0 ex 11.59.59 blir till 11.59
         DataHandler.SaveDataToFile(gameData);
         showPromilleOnSceen(_history.promille); //, untilSober
@@ -216,15 +211,6 @@ public class GameHandler : MonoBehaviour
         currentTime = System.DateTime.Now;
         TimeSpan localTimeDiffrence = (currentTime - _history.timeLastDrink);
         double timeDiff = localTimeDiffrence.TotalMinutes;
-        // if (timeDiff.CompareTo(_history.previousTimeDiff) > 0)
-        // //if (timeDiff > _history.previousTimeDiff)
-        // {
-        //     Debug.Log(timeDiff);
-        //     timeDiff -= _history.previousTimeDiff;
-        //     _history.previousTimeDiff = timeDiff;
-        // }
-        //_history.previousTimeDiff = timeDiff;
-
         return timeDiff;
     }
 

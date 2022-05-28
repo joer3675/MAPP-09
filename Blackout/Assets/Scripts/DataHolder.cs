@@ -23,7 +23,6 @@ public class History
 
     public DateTime timeLastDrink;
     public string dateCreated;
-    public double previousTimeDiff;
     public List<Drinks> _Drinks = new List<Drinks>();
     public double MaxPromille = 0;
     public double promille = 0;

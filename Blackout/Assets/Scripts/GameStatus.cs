@@ -9,13 +9,11 @@ public class GameStatus : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("hasStarted") == 1)
         {
-
             startButton.GetComponentInChildren<Text>().text = "Continue";
             startButton.GetComponent<Image>().color = Color.green;
         }
         else
         {
-
             startButton.GetComponentInChildren<Text>().text = "Start Night";
             startButton.GetComponent<Image>().color = Color.white;
         }

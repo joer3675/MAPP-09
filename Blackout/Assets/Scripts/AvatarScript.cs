@@ -1,17 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/*Visar bilder(avatarer) utifrån hur mycket promille i kroppen användaren har.*/
 public class AvatarScript : MonoBehaviour
 {
     [SerializeField] private GameHandler gameHandler;
     [SerializeField] private Sprite boy1;
     [SerializeField] private Sprite boy2;
     [SerializeField] private Sprite boy3;
-    //[SerializeField] private Sprite boy4;
     [SerializeField] private Sprite girl1;
     [SerializeField] private Sprite girl2;
     [SerializeField] private Sprite girl3;
-    //[SerializeField] private Sprite girl4;
     private float currentTime;
     private float timeDelay = 2.0f;
     private float timer = 0.0f;
@@ -75,31 +74,14 @@ public class AvatarScript : MonoBehaviour
                     if (perMille > 1)
                     {
                         return boy3;
-
                     }
-                    // else if (perMille > 1.5)
-                    // {
-                    //     return boy3;
-                    //     //Gör något
-                    // }
-                    // else if (perMille > 1)
-                    // {
-                    //     return boy3;
-                    //     // Gör något
-                    // }
                     else if (perMille > 0)
                     {
                         return boy2;
-                        // Gör något
-                    }
-                    else if (perMille <= 0)
-                    {
-                        return boy1;
-                        // Bild...
                     }
                     else
                     {
-                        return null;
+                        return boy1;
                     }
                 }
 
@@ -110,29 +92,13 @@ public class AvatarScript : MonoBehaviour
                         return girl3;
 
                     }
-                    // else if (perMille > 3)
-                    // {
-                    //     return girl3;
-                    //     //Gör något
-                    // }
-                    // else if (perMille > 2)
-                    // {
-                    //     return girl2;
-                    //     // Gör något
-                    // }
                     else if (perMille > 0)
                     {
                         return girl2;
-                        // Gör något
-                    }
-                    else if (perMille <= 0)
-                    {
-                        return girl1;
-                        // Bild...
                     }
                     else
                     {
-                        return null;
+                        return girl1;
                     }
                 }
             default:
