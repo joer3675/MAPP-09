@@ -91,6 +91,7 @@ public class SortButtonScript : MonoBehaviour
             {
                 hList = QuickSortScript.QuickSort(hList, 0, hList.Count - 1, "double");
                 isSortedPerMille = true;
+                isSortedDate = false;         //Denna rad löste en liten bugg i sorteringen
             }
             else
             {
@@ -108,6 +109,7 @@ public class SortButtonScript : MonoBehaviour
             {
                 hList = QuickSortScript.QuickSort(hList, 0, hList.Count - 1, "date");
                 isSortedDate = true;
+                isSortedPerMille = false;        //Denna rad löste en liten bugg i sorteringen
             }
             else
             {

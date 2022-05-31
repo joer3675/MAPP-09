@@ -77,7 +77,7 @@ public class GameHandler : MonoBehaviour
         if (_history.promille > 0)
         {
             double currentPerMille = getPerMille();
-            showPromilleOnSceen(currentPerMille); //, (currentPerMille / 0.15))
+            showPromilleOnSceen(currentPerMille);
             _history.promille = currentPerMille;
         }
 
@@ -104,7 +104,7 @@ public class GameHandler : MonoBehaviour
 
 
     /*Den text som ger användaren feedback på sin promillehalt och när hen förväntas vara nyckter. */
-    private void showPromilleOnSceen(double promille) //, double untilSober
+    private void showPromilleOnSceen(double promille)
     {
         DateTime tomorrow = DateTime.ParseExact(timeCreated, "dd-MM-yyyy HH:mm", null).AddDays(1);
         double untilSober = promille / 0.15;
@@ -144,6 +144,12 @@ public class GameHandler : MonoBehaviour
     public void calcPromille(string nameButton)
     {
         PlayerPrefs.SetInt("hasStarted", 1);
+        double timeD = getTimeDiffrence();
+        if (timeD > 0 && _history.promille > 0)
+        {
+            _history.promille -= (0.15 * timeD / 60); // (-0.15 promille/h), timeD = antal minuter sedan senaste drickan / 60 för timmar
+
+        }
         if (_history.promille < 0) _history.promille = 0;
 
         double gram = getGram(nameButton);
@@ -152,12 +158,7 @@ public class GameHandler : MonoBehaviour
         double max = System.Math.Max(previousPerMille, _history.promille);
         max = System.Math.Round(max, 2);
 
-        double timeD = getTimeDiffrence();
-        if (timeD > 0 && _history.promille > 0)
-        {
-            _history.promille -= (0.15 * timeD / 60); // (-0.15 promille/h), timeD = antal minuter sedan senaste drickan / 60 för timmar
 
-        }
 
         double untilSober = _history.promille / 0.15;
         previousPerMille = _history.promille;
